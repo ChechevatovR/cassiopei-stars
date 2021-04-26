@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ task.title }}</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/task.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>{{ task.emoji }}</text></svg>">
+    <script src="/static/ping.js"></script>
+</head>
+<body>
+
+<header>
+    {{ header|safe }}
+</header>
+
+<!-- Очки за задание -->
+<div class="big-card">
+    {% if task.score %}
+        Ваш балл за эту задачу: {{ task.score }}
+    {% else %}
+        Команд, решивших эту задачу: {{ task.solved_by_n }} <br>
+        {% if task.multisolve %}
+            Правильных посылок подряд: {{ task.correct_in_row }}
+        {% endif %}
+    {% endif %}
+</div>
+
+<!-- Описание задания -->
+<div class="big-card">
+    <h1>{{ task.title_full }}</h1>
+    <h4>{{ task.subtitle }}</h4>
+    {{ task.description|safe }}
+</div>
+
+<!-- Поля ввода ответа -->
+{% if task.score == 0 %}
+    <div class="big-card">
+        <h2>Ваш ответ</h2>
+        <form method="post">
+            {{ task.input_form|safe }}
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+
+    {% if task.attachments %}
+        <!-- Вложения -->
+        <div class="big-card">
+            <h2>Приложения</h2>
+            <div id="task-data">{{ task.attachments|safe }}</div>
+        </div>
+    {% endif %}
+{% endif %}
+</body>
+</html>

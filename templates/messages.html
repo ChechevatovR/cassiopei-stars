@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Сообщения</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/messages.css">
+    <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+
+<header>
+    {{ header|safe }}
+</header>
+<div class="big-card">
+    <h1>Написать сообщение жюри</h1>
+    <form method="post">
+        <label for="question">Ваш вопрос:</label>
+        <br>
+        <textarea id="question" name="question" cols="40" rows="5" placeholder="Ответ не гарантируется" required></textarea>
+        <br>
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+
+{% for message in messages %}
+<div class="big-card">
+    <div class="message-data">
+        Отправлено в: {{ message.date }} GMT<br>
+        От: {{ message.from }}<br>
+        Для: {{ message.to }}
+    </div><hr>
+    <div class="news-message">{{ message.message }}</div>
+</div>
+{% endfor %}
+</body>
+</html>

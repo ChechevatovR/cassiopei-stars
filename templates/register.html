@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Регистрация</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/auth.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+    <div class="big-card form-card">
+        <h1>
+            Регистрация
+        </h1>
+        <form method="post">
+            <div class="form big-card">
+                {% if error %}
+                <div class="error" onclick="this.style.display='none';">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <div class="info">
+                    Регистрация в команду <span class="team-name" title="{{ team_name }}">{{ team_name }}</span>.<br>
+                    Ссылка для регистрации в эту команду:
+                    <div class="reg-link">
+                        http://fetefot763.eu.pythonanywhere.com/reg?team={{ team_id }}
+                    </div>
+                </div>
+                <div class="input-holder">
+                    <input type="text" id="user-login" name="login" autocomplete="off" required><br>
+                    <label for="user-login">Логин</label>
+                </div>
+                <div class="input-holder">
+                    <input type="password" id="user-pass" name="password" onkeyup="checkPasswords();" autocomplete="off" required><br>
+                    <label for="user-pass">Пароль</label>
+                    <label target="user-pass" class="show-password" onclick="toggleview(this);" title="Скрыть/показать пароль"><i class="far fa-eye"></i></label>
+                </div>
+                <div class="input-holder">
+                    <input type="password" id="user-pass-repeat" onkeyup="checkPasswords();" name="password-repeat" autocomplete="off" required><br>
+                    <label for="user-pass-repeat">Повторите пароль</label>
+                    <label target="user-pass-repeat" class="show-password" onclick="toggleview(this);" title="Скрыть/показать пароль"><i class="far fa-eye"></i></label>
+                </div>
+                <div class="input-holder">
+                    <input type="text" id="user-name" name="name" autocomplete="off" required><br>
+                    <label for="user-name">Имя</label>
+                </div>
+                <div class="input-holder">
+                    <input type="text" id="user-surname" name="lastname" autocomplete="off" required><br>
+                    <label for="user-surname">Фамилия</label>
+                </div>
+                <div class="btn-holder">
+                    <input id= "form-submit" type="submit" value="Зарегистрироваться" class="form-btn fb-first">
+                </div>
+            </div>
+        </form>
+        <div class="notification big-card">
+            <span class="header">Мы используем cookie 🍪 и храним персональные данные 📔</span><br>
+            Регистрируясь на нашем сайте, вы автоматически соглашаетесь с использованием cookie, а также со сбором и храниением персональных данных.
+        </div>
+    </div>
+</body>
+<script src="/static/auth.js"></script>
+</html>

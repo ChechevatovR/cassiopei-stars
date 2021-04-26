@@ -23,33 +23,33 @@ body {
     --color-bw-third: rgba(1,1,1,0.7);
 }
 
-/*body.dark-mode {*/
-/*    background-color: #45435d;*/
-/*    --color-main: #3c69ba;*/
-/*    --color-support: #1a345f;*/
-/*    --color-alternate: orangered;*/
-/*    --color-done: rgba(26, 52, 95, 0.5);*/
-/*    --color-hover: #5182e0;*/
-/*    --color-even: #748cb0;*/
-/*    --color-odd: #9fb4d6;*/
-/*    --color-bw-first: #3c3c3c;*/
-/*    --color-bw-second: white;*/
-/*    --color-bw-third: rgba(254,254,254,0.7);*/
-/*}*/
-
 body.dark-mode {
-    background-color: #111111;
-    --color-main: orangered;
-    --color-support: darkorange;
-    --color-alternate: cornflowerblue;
-    --color-hover: #ff5a1d;
-    --color-done: rgba(255,140,0,0.5);
-    --color-even: #ffbb75;
-    --color-odd: #ffd1a0;
+    background-color: #45435d;
+    --color-main: #3c69ba;
+    --color-support: #1a345f;
+    --color-alternate: orangered;
+    --color-done: rgba(26, 52, 95, 0.5);
+    --color-hover: #5182e0;
+    --color-even: #748cb0;
+    --color-odd: #9fb4d6;
     --color-bw-first: #3c3c3c;
     --color-bw-second: white;
     --color-bw-third: rgba(254,254,254,0.7);
 }
+
+/*body.dark-mode {*/
+/*    background-color: #111111;*/
+/*    --color-main: orangered;*/
+/*    --color-support: darkorange;*/
+/*    --color-alternate: cornflowerblue;*/
+/*    --color-hover: #ff5a1d;*/
+/*    --color-done: rgba(255,140,0,0.5);*/
+/*    --color-even: #ffbb75;*/
+/*    --color-odd: #ffd1a0;*/
+/*    --color-bw-first: #3c3c3c;*/
+/*    --color-bw-second: white;*/
+/*    --color-bw-third: rgba(254,254,254,0.7);*/
+/*}*/
 
 body.dark-mode header, body.dark-mode .big-card {
     box-shadow: none;

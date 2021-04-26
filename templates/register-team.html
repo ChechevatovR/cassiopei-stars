@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Регистрация команды</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/auth.css">
+    <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+    <div class="big-card form-card">
+        <h1>Регистрация команды</h1>
+        <form method="post">
+            <div class="form big-card">
+                {% if error %}
+                <div class="error" onclick="this.style.display='none';">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <div class="input-holder">
+                    <input type="text" id="team-name" name="team-name" autocomplete="off" required><br>
+                    <label for="team-name">Название команды</label>
+                </div>
+                <div class="btn-holder">
+                    <input type="submit" value="Зарегистрировать команду" class="form-btn fb-first">
+                </div>
+            </div>
+        </form>
+        <div class="notification big-card">
+            <span class="header">Мы используем cookie 🍪 и храним персональные данные 📔</span><br>
+            Регистрируясь на нашем сайте, вы автоматически соглашаетесь с использованием cookie, а также со сбором и храниением персональных данных.
+        </div>
+    </div>
+</body>
+</html>

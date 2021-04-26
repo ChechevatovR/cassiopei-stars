@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Авторизация</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/auth.css">
+    <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+<div class="big-card form-card">
+    <h1>Авторизация</h1>
+    <form method="post">
+        <div class="form big-card">
+            {% if error %}
+                <div class="error" onclick="this.style.display='none';">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <div class="input-holder">
+                <input type="text" id="user-login" name="login" autocomplete="off" required><br>
+                <label for="user-login">Логин</label>
+            </div>
+            <div class="input-holder">
+                <input type="password" id="user-pass" name="password" autocomplete="off" required><br>
+                <label for="user-pass">Пароль</label>
+                <label target="user-pass" class="show-password" onclick="toggleview(this);"
+                       title="Скрыть/показать пароль"><i class="far fa-eye"></i></label>
+            </div>
+            <div class="btn-holder">
+                <input type="submit" value="Войти" class="form-btn fb-first">
+                <div class="form-btn fb-second">
+                    <div class="link-fix">
+                        <a href="/reg-team">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="table-btn big-card">
+        <a href="/scoreboard" class="link-fix">
+            <div class="link-fix">
+                <i class="fas fa-table"></i>Перейти к таблице лидеров
+            </div>
+        </a>
+    </div>
+    <div class="notification big-card">
+        <span class="header">Мы используем cookie 🍪</span><br>
+        Авторизуясь на нашем сайте, вы автоматически соглашаетесь с использованием cookie.
+    </div>
+</div>
+</body>
+<script src="/static/auth.js"></script>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Рейтинг</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/scoreboard.css">
+    <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+<header>
+    {{ header|safe }}
+</header>
+
+
+<div class="big-card container">
+    <!-- Первая таблица - только первые 2 колонки из всей - закреплена -->
+    <div class="table-users">
+        <table>
+            <tr>
+                <th class="position"></th>
+                <th class="name" title="">Команда</th>
+                <th class="score">Балл</th>
+            </tr>
+            {% for row in table1_data %}
+                <tr>
+                    <td class="position"> {{ row.position }} </td>
+                    <td class="name" title="{{ row.name }}"> {{ row.name }} </td>
+                    <td class="score"> {{ row.score }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- Вторая таблица - с задачами - крутится-->
+    <div class="table-tasks" onclick="scroll();">
+        <table>
+            <tr>
+                {% for item in table2_header %}
+                    <th title="{{ item.full }}">
+                        <a href="/tasks/task{{ item.id }}">{{ item.short }}</a>
+                    </th>
+                {% endfor %}
+            </tr>
+            {% for row in table2_data %}
+                <tr>
+                    {% for item in row %}
+                        <td>
+                            {{ item }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</body>
+<script src="/static/scroll.js"></script>
+</html>

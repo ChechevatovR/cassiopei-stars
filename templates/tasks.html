@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Список заданий</title>
+    <link rel="stylesheet" href="../static/shared.css">
+    <link rel="stylesheet" href="../static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../static/tasks.css">
+    <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+
+<header>
+    {{ header|safe }}
+</header>
+
+<div class="big-card">
+    {% for task in tasks %}
+        <a href="/tasks/task{{ task.id }}">
+            <div class="task {% if task.cur_score %} task-done {% endif %}" id="task{{ task.id }}">
+                <div class="task-column">
+                    <div class="task-title">{{ task.title }}</div>
+                    <div class="task-subtitle">{{ task.subtitle }}</div>
+                </div>
+                <div class="task-column align-right">
+                    <div>Решило команд: {{ task.solved_by_n }}</div>
+                    <div>Ваш балл: {{ task.cur_score }}</div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+</body>
+</html>

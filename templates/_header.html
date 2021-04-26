@@ -1,0 +1,114 @@
+<!-- КНОПКА НАЗАД -->
+{% if not exclude_back %}
+    <div class="nav btn back-btn" onclick="history.back()">
+    <span class="btn-text">
+        Назад<br>
+        <span class="btn-icon"><i class="fas fa-chevron-left"></i></span>
+    </span>
+    </div>
+{% endif %}
+
+<!-- ПРИВЕТСТВИЕ -->
+{% if authorized %}
+    <div class="greeting-container">
+        <span class="greeting">{{ greeting }}, {{ user_name }}!</span><br>
+        Команда: {{ team_name }}.
+    </div>
+{% else %}
+    <div class="greeting-container">
+        <span class="greeting">{{ page_name }}</span><br>
+    </div>
+{% endif %}
+
+<!-- ПАНЕЛИ С ОЧКАМИ -->
+{% if authorized %}
+    <div class="nav btn">
+        <a href="/scoreboard">
+            <div class="link-fix">
+                    <span class="btn-text">
+                        Очков<br>
+                        <span class="btn-icon">{{ team_score }}</span>
+                    </span>
+            </div>
+        </a>
+    </div>
+    <div class="nav btn">
+        <a href="/scoreboard">
+            <div class="link-fix">
+                    <span class="btn-text">
+                        Заданий<br>
+                        <span class="btn-icon">{{ team_tasks }}</span>
+                    </span>
+            </div>
+        </a>
+    </div>
+{% else %}
+    {% if not exclude_rating %}
+        <div class="nav btn">
+            <a href="/scoreboard">
+                <div class="link-fix">
+                <span class="btn-text">
+                    Рейтинг<br>
+                    <span class="btn-icon"><i class="fas fa-table"></i></span>
+                </span>
+                </div>
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
+
+<!-- КНОПКА НА ГЛАВНУЮ -->
+{% if not exclude_home %}
+    <div class="nav btn">
+        <a href="/">
+            <div class="link-fix">
+                <span class="btn-text">
+                    Главная<br>
+                    <span class="btn-icon"><i class="fa fa-home"></i></span>
+                </span>
+            </div>
+        </a>
+    </div>
+{% endif %}
+
+<!-- КНОПКА СООБЩЕНИЯ -->
+{% if authorized and not exclude_messages %}
+    <div class="nav btn wide">
+        <a href="/messages">
+            <div class="link-fix">
+                <span class="btn-text">
+                    Сообщения<br>
+                    <span class="btn-icon" amount="2"><i class="fas fa-comment-dots"></i></span>
+                </span>
+            </div>
+        </a>
+    </div>
+{% endif %}
+
+<!-- КНОПКА МАНУАЛ -->
+{% if not exclude_manual %}
+    <div class="nav btn">
+        <a href="/manual">
+            <div class="link-fix">
+            <span class="btn-text">
+                Мануал<br>
+                <span class="btn-icon"><i class="fas fa-book-open"></i></span>
+            </span>
+            </div>
+        </a>
+    </div>
+{% endif %}
+
+<!-- КНОПКА ВЫХОД -->
+{% if authorized %}
+    <div class="nav btn">
+        <a href="/auth">
+            <div class="link-fix">
+            <span class="btn-text">
+                Выйти<br>
+                <span class="btn-icon"><i class="fas fa-sign-out-alt"></i></span>
+            </span>
+            </div>
+        </a>
+    </div>
+{% endif %}
