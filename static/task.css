@@ -1,0 +1,49 @@
+h1 {
+    text-align: center;
+    font-size: xx-large;
+    margin: 0 0 .4rem 0;
+}
+
+h2 {
+    margin: 0 0 1rem 0;
+}
+
+h4 {
+    text-align: center;
+    font-size: smaller;
+    margin: 0 0 1rem 0;
+}
+
+/* ОБНОВЛЕНО */
+
+form {
+    display: flex;
+}
+
+input[type=text], input[type=number] {
+    outline: none;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1.7rem;
+    flex: 9;
+    border: 1px solid black;
+    border-radius: .6rem 0 0 .6rem;
+    background: var(--color-odd);
+    padding-left: .5rem;
+}
+
+input[type=submit] {
+    flex: 1;
+    border: 1px solid black;
+    border-radius: 0 .6rem .6rem 0;
+    border-left: none;
+    background: var(--color-main);
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+
+input[type=submit]:hover {
+    background: var(--color-hover);
+}

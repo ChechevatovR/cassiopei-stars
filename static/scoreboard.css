@@ -1,0 +1,112 @@
+.big-card {
+    display: flex;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    right: .95rem;
+    border-left: 1px solid black;
+    height: calc(100% - 2rem);
+}
+
+.container.scrollbar::after {
+    height: calc(100% - 2rem - 18px);
+}
+
+.table-users {
+    flex: 0 0 15rem;
+    border-right: 1px solid black;
+}
+
+.table-tasks {
+    vertical-align: top;
+    flex: auto;
+    overflow-x: auto;
+    margin-left: -1px;
+}
+
+td, th {
+    border: 1px solid black;
+}
+
+th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2rem;
+    background-color: var(--color-support);
+    color: var(--color-bw-second);
+}
+
+td {
+    color: black;
+}
+
+.table-users td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ширина столбцов*/
+.position {
+    width: 2rem;
+}
+
+.name {
+    width: 10rem;
+}
+
+.score {
+    width: 5rem;
+}
+
+.table-tasks td, .table-tasks th {
+    width: 3rem;
+    max-width: 3rem;
+}
+
+/* Покраска строк в различные цвета */
+tr:nth-child(odd) {
+    background-color: var(--color-odd);
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-even);
+}
+
+/* Фикс против дублирования границы между таблицами */
+.table-tasks td:first-child, .table-tasks th:first-child {
+    border-left: none;
+}
+
+.table-tasks td:last-child, .table-tasks th:last-child {
+    border-right: none;
+}
+
+/* Стили скроллбара */
+.table-tasks::-webkit-scrollbar {
+    display: block;
+    height: 18px;
+}
+
+.table-tasks::-webkit-scrollbar-thumb {
+    background: var(--color-support);
+    border-top: 4px solid var(--color-bw-first);
+}
+
+.table-tasks::-webkit-scrollbar-track {
+    background: var(--color-even);
+    border-top: 4px solid var(--color-bw-first);
+}

@@ -1,0 +1,10 @@
+h1 {
+    margin: 0 0 1rem;
+}
+
+.message-data {
+    font-weight: lighter;
+    font-size: .8rem;
+    margin-left: 1.5rem;
+    font-style: italic;
+}

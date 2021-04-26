@@ -1,0 +1,46 @@
+.big-card {
+    margin: .5em;
+    border-radius: .6rem;
+    box-shadow: 0 4px 4px #6d6d6d;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 1rem;
+}
+
+.task {
+    background-color: var(--color-support);
+    border-radius: .6rem;
+    color: white;
+    margin: .5rem;
+    padding: .5rem;
+    box-shadow: 2px 2px 2px #6d6d6d;
+    transition: box-shadow .3s, transform .3s;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.task:hover {
+    box-shadow: 5px 5px 5px #6d6d6d;
+    transform: scale(1.02);
+}
+
+.task-column {
+    display: inline-block;
+}
+
+.align-right {
+    text-align: end;
+}
+
+.task-title {
+    font-size: 1.6rem;
+    margin-bottom: .2rem;
+}
+
+.task-subtitle {
+    font-size: .9rem;
+}
+
+.task-done {
+    background: var(--color-done);
+}

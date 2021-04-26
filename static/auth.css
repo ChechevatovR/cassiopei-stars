@@ -1,0 +1,212 @@
+.form-card {
+    position: relative;
+    width: 50%;
+    margin: auto;
+    background: var(--color-support);
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+form {
+    position: relative;
+}
+
+.form {
+    position: relative;
+    width: 60%;
+    margin: auto;
+}
+
+.error {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem;
+    background: #ffbcbc;
+    margin-bottom: 1rem;
+    color: #a01300;
+    border: 2px solid #a01300;
+    border-radius: .6rem;
+    font-size: 1.05rem;
+}
+
+
+.input-holder {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+input[type=text], input[type=password] {
+    box-sizing: border-box;
+    padding: .9rem .5rem .1rem .5rem;
+    width: 100%;
+    line-height: 1.4rem;
+    margin: 0;
+    font-size: 1.4rem;
+    vertical-align: bottom;
+    border-radius: .6rem;
+    outline: none;
+    border: 2px solid black;
+}
+
+label:not(.show-password) {
+    text-align: left;
+    position: absolute;
+    font-size: 1.4rem;
+    top: .7rem;
+    left: .7rem;
+    transition: .3s;
+    color: rgba(1,1,1,0.7);
+}
+
+
+input[type=text]:valid ~ label:not(.show-password), input[type=text]:focus ~ label:not(.show-password), input[type=password]:valid ~ label:not(.show-password), input[type=password]:focus ~ label:not(.show-password) {
+    font-size: .8rem;
+    /*font-weight: bold;*/
+    left: 1rem;
+    top: .15rem;
+}
+
+.btn-holder {
+    display: flex;
+}
+
+.form-btn {
+    font-size: 1.15rem;
+    display: flex;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.fb-first {
+    flex: 4;
+    border: none;
+    padding: 0;
+    background: var(--color-main);
+    border-radius: .6rem;
+    color: white;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.fb-first:hover {
+    background: var(--color-hover);
+}
+
+.fb-second {
+    flex: 6;
+    margin-left: 1rem;
+}
+
+.fb-second div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.fb-second a {
+    color: var(--color-bw-third);
+}
+
+.table-btn {
+    position: relative;
+    height: 3rem;
+    width: calc(60% + 2rem);
+    margin: 1rem auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.table-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.table-btn .link-fix {
+    display: flex;
+    justify-content: center;
+    line-height: 3rem;
+    font-size: 1.3rem;
+    color: var(--color-bw-third);
+}
+
+.notification {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.header {
+    font-weight: bold;
+    line-height: 2rem;
+}
+
+.info {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-odd);
+    margin-bottom: 1rem;
+    border: 2px solid var(--color-main);
+    border-radius: .6rem;
+    font-size: 1.05rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: black;
+}
+
+.info .team-name {
+    font-weight: bold;
+    color: var(--color-main);
+}
+
+.reg-link {
+    user-select: all;
+    box-sizing: border-box;
+    width: 100%;
+    background: rgba(255,255,255,0.4);
+    margin: .25rem 0;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: .3rem .5rem;
+    border-radius: .6rem;
+    color: black;
+    overflow-x: auto;
+    border: 2px solid var(--color-support);
+    white-space: nowrap;
+}
+
+.reg-link::-webkit-scrollbar {
+    display: block;
+    height: 8px;
+}
+
+.reg-link::-webkit-scrollbar-thumb {
+    background: var(--color-support);
+    border: 1px solid var(--color-main);
+    border-radius: 1rem;
+}
+
+.fa-table {
+    margin-right: .5rem;
+    line-height: 3rem;
+}
+
+.show-password {
+    user-select: none;
+    text-align: right;
+    position: absolute;
+    font-size: 1rem;
+    top: .9rem;
+    right: 1rem;
+    color: rgba(1,1,1,0.2);
+    cursor: pointer;
+    width: 1rem;
+}
+
+.show-password:hover {
+    color: rgba(1,1,1,0.7);
+}
+
+input[type=submit][disabled] {
+    background: rgba(1,1,1,0.2);
+}
