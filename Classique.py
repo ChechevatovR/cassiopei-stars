@@ -50,23 +50,19 @@ class Team:
 
 class Task:
     id: int
-
-    type_question: str
-    # static
-    # generated
-
-    type_answer: str
-    # static
-    # generated
-    # validated
-
     generator = None
     checker = None
 
     def __init__(self, id: int):
         self.id = id
-        self.type_question = query_fetchone('SELECT type_question FROM tasks WHERE id = ?', [self.id])[0]
-        self.type_answer = query_fetchone('SELECT type_answer FROM tasks WHERE id = ?', [self.id])[0]
+
+    @property
+    def type_question(self):
+        return query_fetchone('SELECT type_question FROM tasks WHERE id = ?', [self.id])[0]
+
+    @property
+    def type_answer(self):
+        return query_fetchone('SELECT type_answer FROM tasks WHERE id = ?', [self.id])[0]
 
     @property
     def solved_by_n(self):

@@ -8,7 +8,7 @@ bp = Blueprint('manual', __name__, template_folder='templates')
 
 @bp.route('/manual')
 def manual():
-    if not (user := check_user_auth()).is_authorized:
+    if (user := check_user_auth()).is_authorized:
         return render_template(
             'manual.html',
             header=make_header('Помощь', user, exclude_manual=True),

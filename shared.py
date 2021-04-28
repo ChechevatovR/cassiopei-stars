@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from shared_core import *
-from user import User
-from team import Team
+from Classique import *
 import time
 import sqlite3
 from flask import render_template, request

@@ -2,26 +2,9 @@
 
 from shared import *
 from authorizer import check_user_auth
-from task import Task
 from flask import Blueprint, redirect, url_for, render_template, make_response, current_app, send_file
 
 bp = Blueprint('tasks', __name__, template_folder='templates')
-
-
-@bp.route('/tasks')
-def tasks_list():
-    user = check_user_auth()
-    if not user.is_authorized:
-        return redirect('/auth')
-    print(user.id, user.is_authorized)
-
-    with current_app.app_context():
-        tasks = current_app.config['tasks']
-
-    return render_template(
-        'tasks.html',
-        tasks=[dict(zip(['id', 'title', 'subtitle', 'solved_by_n', 'cur_score'], [task.id, task.title_full, task.subtitle, task.solved_by_n, task.score])) for task in tasks.values()],
-        header=make_header('Список заданий', user=user, exclude_home=True))
 
 
 @bp.route('/tasks/task<task_id>', methods=['GET'])
@@ -98,15 +81,3 @@ def task_post(task_id: int):
     else:
         query_commit('UPDATE task_status SET status = 0, in_row = 0 WHERE team_id = ? AND task_id = ?', [user.team.id, task.id])
     return redirect(f'/tasks/task{task_id}')
-
-
-@bp.route('/task-static-content/<path>')
-def serve_static_payload(path: str):
-    print('serve_static_payload', path)
-    return send_file(f'task-static-content/{path}', cache_timeout=0)
-
-
-@bp.route('/task-generated-content/<path1>/<path2>')
-def serve_generated_payload(path1, path2):
-    print('serve_generated_payload', path1)
-    return send_file(f'task-generated-content/{path1}/{path2}', cache_timeout=0)

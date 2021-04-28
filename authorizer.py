@@ -3,7 +3,6 @@ from shared import *
 from flask import Blueprint, request, session, redirect, url_for, render_template, make_response
 from datetime import timedelta, datetime
 from hashlib import sha256
-from user import User
 import sqlite3
 import secrets
 import flask
