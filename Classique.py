@@ -1,6 +1,51 @@
 from shared_core import *
-from team import Team
-from flask import request
+
+
+class User:
+    id: int
+    is_authorized: bool
+
+    def __init__(self, id: int, is_authorized: bool):
+        self.id = id
+        self.is_authorized = is_authorized
+
+    @property
+    def login(self):
+        return query_fetchone('SELECT login FROM users WHERE id = ?', [self.id])[0]
+
+    @property
+    def team(self):
+        return Team(query_fetchone('SELECT team_id FROM users WHERE id = ?', [self.id])[0])
+
+    @property
+    def name1(self):
+        return query_fetchone('SELECT name FROM users WHERE id = ?', [self.id])[0]
+
+    @property
+    def name2(self):
+        return query_fetchone('SELECT lastname FROM users WHERE id = ?', [self.id])[0]
+
+
+class Team:
+    id: int
+
+    def __init__(self, id: int):
+        self.id = id
+
+    @property
+    def name(self):
+        return query_fetchone('SELECT name FROM teams WHERE id = ?', [self.id])[0]
+
+    @property
+    def score(self):
+        score = 0
+        for task_id in [i[0] for i in query_fetchall('SELECT task_id FROM solutions WHERE team_id = ?', [self.id])]:
+            score += Task(task_id).score
+        return score
+
+    @property
+    def tasks(self):
+        return query_fetchone('SELECT COUNT(*) FROM solutions WHERE team_id = ?', [self.id])[0]
 
 
 class Task:
@@ -45,23 +90,6 @@ class Task:
             return query_fetchone('SELECT in_row FROM task_status WHERE task_id = ? AND team_id = ?', [self.id, team.id])[0]
         except TypeError:
             return 0
-
-    def attachments(self, team=Team(-1)):
-        if self.type_question == 'static':
-            return query_fetchone('SELECT payload FROM tasks WHERE id = ?', [self.id])
-        elif self.type_question == 'generated':
-            if self.type_answer == 'generated':
-                payload, answer = self.generator(team.id)
-            else:
-                payload = self.generator(team.id)
-
-    def check(self):
-        if self.attempts_required > 0:
-            # Multisolve
-            return self.generate_payload()
-        else:
-            # One attempt - correct answer is in database
-            answer_got = None
 
     @property
     def emoji(self):
