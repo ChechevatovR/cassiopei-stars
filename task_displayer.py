@@ -29,7 +29,7 @@ def task_get(task_id: int):
     elif task.type_question == 'static':
         payload = query_fetchone('SELECT payload FROM tasks WHERE id = ?', [task.id])[0]
 
-    print(payload)
+    # print(payload)
 
     return render_template(
         'task.html',
@@ -67,7 +67,7 @@ def task_post(task_id: int):
         answer = request.form.get('answer')
         required = query_fetchone('SELECT required_answer FROM task_status WHERE task_id = ? AND team_id = ?', [task.id, user.team.id])[0]
         correct = answer == required
-        print(answer, required, correct)
+        # print(answer, required, correct)
     elif task.type_answer == 'validated':
         correct = task.checker()
     else:

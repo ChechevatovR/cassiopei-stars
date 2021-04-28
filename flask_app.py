@@ -46,33 +46,32 @@ def root():
 
 @app.route('/favicon.ico')
 def favicon():
-    print('Got a favicon request')
+    # print('Got a favicon request')
     return send_from_directory('/static', 'favicon.ico')
 
 
 @app.route('/task-static-content/<path>')
 def serve_static_payload(path: str):
-    print('serve_static_payload', path)
+    # print('serve_static_payload', path)
     return send_from_directory('task-static-content', path, cache_timeout=0)
 
 
 @app.route('/task-generated-content/<path1>/<path2>')
 def serve_generated_payload(path1, path2):
-    print('serve_generated_payload', path1)
+    # print('serve_generated_payload', path1)
     return send_from_directory('task-generated-content', f'{path1}/{path2}', cache_timeout=0)
 
 
 @app.before_request
 def connect_db():
-    print('Connected db')
-    #with app.app_context():
+    # print('Connected db')
     g.db_con = sqlite3.connect('db.sqlite')
     g.db_cur = g.db_con.cursor()
 
 
 @app.after_request
 def disconnect_db(response):
-    print('Disconnected db')
+    # print('Disconnected db')
     g.db_con.close()
     return response
 

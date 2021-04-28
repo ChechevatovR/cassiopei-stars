@@ -53,7 +53,7 @@ def solve(text: str) -> int:
     #while '  ' in text:
     #    text = text.replace('  ', ' ')
     text = text.strip()
-    print(text.split())
+    # print(text.split())
     return len(text.split())
 
 
@@ -61,6 +61,6 @@ if __name__ == '__main__':
     while True:
         txt = get_text_from_data(get_data())
         res = solve(txt)
-        print(res, txt)
+        # print(res, txt)
         send_data(res)
 

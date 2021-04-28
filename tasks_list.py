@@ -12,7 +12,7 @@ def tasks_list():
     user = check_user_auth()
     if not user.is_authorized:
         return redirect('/auth')
-    print(user.id, user.is_authorized)
+    # print(user.id, user.is_authorized)
 
     with current_app.app_context():
         tasks = current_app.config['tasks']
