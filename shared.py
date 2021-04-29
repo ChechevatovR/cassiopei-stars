@@ -41,7 +41,8 @@ def header_data(user: User) -> dict:
         'user_name': user.name1,
         'team_name': user.team.name,
         'team_score': user.team.score,
-        'team_tasks': user.team.tasks
+        'team_tasks': user.team.tasks,
+        'unread': query_fetchone('SELECT COUNT(*) FROM messages WHERE id > ? AND (src = ? OR dst = ? OR dst = 0)', [request.cookies.get('last_message_id', -1), user.id, user.id])[0]
     }
 
 

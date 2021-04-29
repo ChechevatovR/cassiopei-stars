@@ -9,8 +9,8 @@ def news_get():
     if not (user := check_user_auth()).is_authorized:
         return redirect('/auth')
 
-    messages = [dict(zip(['date', 'from', 'to', 'message'], i)) for i in query_fetchall(
-        '''SELECT date, src, dst, text FROM messages WHERE src = ? OR dst = ? OR dst = 0''',
+    messages = [dict(zip(['id', 'date', 'from', 'to', 'message'], i)) for i in query_fetchall(
+        '''SELECT id, date, src, dst, text FROM messages WHERE src = ? OR dst = ? OR dst = 0''',
         [user.team.id, user.team.id]
     )]
 
@@ -20,15 +20,19 @@ def news_get():
         else:
             message['to'] = query_fetchone('SELECT name FROM teams WHERE id = ?', [message['to']])[0]
         message['from'] = query_fetchone('SELECT name FROM teams WHERE id = ?', [message['from']])[0]
-    return render_template(
-        'messages.html',
-        messages=messages,
-        header=make_header(
-            'Сообщения',
-            user,
-            exclude_messages=True
+    response = make_response(
+        render_template(
+            'messages.html',
+            messages=messages,
+            header=make_header(
+                'Сообщения',
+                user,
+                exclude_messages=True
+            )
         )
     )
+    response.set_cookie('last_message_id', str(messages[-1]['id']), expires=1625072401)
+    return response
 
 
 @bp.route('/messages', methods=['POST'])

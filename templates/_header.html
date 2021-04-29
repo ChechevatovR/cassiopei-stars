@@ -76,9 +76,9 @@
     <div class="nav btn wide">
         <a href="/messages">
             <div class="link-fix">
-                <span class="btn-text">
+                <span class="btn-text {% if unread > 0 %} unread {% endif %}">
                     Сообщения<br>
-                    <span class="btn-icon" amount="2"><i class="fas fa-comment-dots"></i></span>
+                    <span class="btn-icon" amount="{{ unread }}"><i class="fas fa-comment-dots"></i></span>
                 </span>
             </div>
         </a>
