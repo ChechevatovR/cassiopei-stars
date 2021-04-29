@@ -20,12 +20,22 @@
                     {{ error }}
                 </div>
                 {% endif %}
+                <!--
                 <div class="info">
                     Регистрация в команду <span class="team-name" title="{{ team_name }}">{{ team_name }}</span>.<br>
                     Ссылка для регистрации в эту команду:
                     <div class="reg-link">
                         http://fetefot763.eu.pythonanywhere.com/reg?team={{ team_id }}
                     </div>
+                </div>
+                 -->
+                <div class="input-holder">
+                    <input type="text" id="team-id" name="team_id" autocomplete="off" required {% if team_id %} readonly value="{{ team_id }}" {% endif %}><br>
+                    <label for="user-login">ID команды</label>
+                </div>
+                <div class="input-holder">
+                    <input type="text" id="team-invite" name="team_invite" autocomplete="off" required {% if team_invite %} readonly value="{{ team_invite }}" {% endif %}><br>
+                    <label for="user-login">Инвайт-код</label>
                 </div>
                 <div class="input-holder">
                     <input type="text" id="user-login" name="login" autocomplete="off" required><br>
@@ -37,7 +47,7 @@
                     <label target="user-pass" class="show-password" onclick="toggleview(this);" title="Скрыть/показать пароль"><i class="far fa-eye"></i></label>
                 </div>
                 <div class="input-holder">
-                    <input type="password" id="user-pass-repeat" onkeyup="checkPasswords();" name="password-repeat" autocomplete="off" required><br>
+                    <input type="password" id="user-pass-repeat" onkeyup="checkPasswords();" autocomplete="off" required><br>
                     <label for="user-pass-repeat">Повторите пароль</label>
                     <label target="user-pass-repeat" class="show-password" onclick="toggleview(this);" title="Скрыть/показать пароль"><i class="far fa-eye"></i></label>
                 </div>
@@ -46,7 +56,7 @@
                     <label for="user-name">Имя</label>
                 </div>
                 <div class="input-holder">
-                    <input type="text" id="user-surname" name="lastname" autocomplete="off" required><br>
+                    <input type="text" id="user-surname" name="surname" autocomplete="off" required><br>
                     <label for="user-surname">Фамилия</label>
                 </div>
                 <div class="btn-holder">

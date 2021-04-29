@@ -33,6 +33,10 @@ class Team:
         self.id = id
 
     @property
+    def is_real_team(self):
+        return query_fetchone('SELECT COUNT(*) FROM teams WHERE id = ?', [self.id])[0] > 0
+
+    @property
     def name(self):
         return query_fetchone('SELECT name FROM teams WHERE id = ?', [self.id])[0]
 
@@ -46,6 +50,14 @@ class Team:
     @property
     def tasks(self):
         return query_fetchone('SELECT COUNT(*) FROM solutions WHERE team_id = ?', [self.id])[0]
+
+    @property
+    def invite(self):
+        return int(query_fetchone('SELECT invite FROM teams WHERE id = ?', [self.id])[0])
+
+    @property
+    def size(self):
+        return query_fetchone('SELECT COUNT(*) FROM users WHERE team_id = ?', [self.id])[0]
 
 
 class Task:
