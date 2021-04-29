@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import requests
+import time
 
 login = 'admin'
-token = 'd5475d8022feeff00efed28421c3ef56a028687c2e58303d076f2cccded8883b'
-host = 'http://localhost/'
-# host = 'https://fetefot763.eu.pythonanywhere.com/'
+# token = '37d62656f79a72da9cd293aaea21a848fa7bdaad03ee7e9224be9197dd758dcd'
+token = '7c50ce806271c19e07d69f71fb89890aa08ce7cc153dc209c27a32e8609d0d66'
+# host = 'http://localhost/'
+host = 'https://fetefot763.eu.pythonanywhere.com/'
 
 marker_beg = '<div id="task-data">'
 marker_end = '</div>'
@@ -12,25 +14,28 @@ marker_end = '</div>'
 
 def get_data():
     print('Sending a GET request...   ', end='')
+    start = time.time()
     text = requests.get(
         host + 'tasks/task1',
         cookies={'login': login, "token": token},
         allow_redirects=False
     ).text
     #print(text)
-    print('Got a response')
+    print(f'Got a response in {time.time() - start}')
     return text
 
 
 def send_data(data):
-    print(f'Sending a POST request with "{data}"...   ', end='', )
+    print(f'Sending a POST request with "{data}"...   ', end='')
+    start = time.time()
+
     text = requests.post(
         host + 'tasks/task1',
         cookies={'login': login, "token": token},
         data={'answer': data},
         allow_redirects=False
     ).text
-    print('Got a response')
+    print(f'Got a response in {time.time() - start}')
     return text
 
 
@@ -58,9 +63,13 @@ def solve(text: str) -> int:
 
 
 if __name__ == '__main__':
+    start = time.time()
+    sols = 0
     while True:
         txt = get_text_from_data(get_data())
         res = solve(txt)
         # print(res, txt)
         send_data(res)
+        sols += 1
+        print(f'AVERAGE: {round((time.time() - start) / sols, 5)} sec/sols ON {sols} solutions')
 
