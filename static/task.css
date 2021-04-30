@@ -47,3 +47,7 @@ input[type=submit] {
 input[type=submit]:hover {
     background: var(--color-hover);
 }
+
+#task-data a {
+    color: var(--color-alternate)
+}
