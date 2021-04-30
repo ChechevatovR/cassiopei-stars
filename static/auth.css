@@ -62,7 +62,7 @@ label:not(.show-password) {
 }
 
 
-input[type=text]:valid ~ label:not(.show-password), input[type=text]:focus ~ label:not(.show-password), input[type=password]:valid ~ label:not(.show-password), input[type=password]:focus ~ label:not(.show-password) {
+input[type=text]:valid ~ label:not(.show-password), input[type=text]:focus ~ label:not(.show-password), input[type=password]:valid ~ label:not(.show-password), input[type=password]:focus ~ label:not(.show-password), input[type=text][readonly] ~ label:not(.show-password) {
     font-size: .8rem;
     /*font-weight: bold;*/
     left: 1rem;
