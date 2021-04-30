@@ -1,4 +1,4 @@
-<!-- КНОПКА НАЗАД -->
+<!-- КНОПКА НАЗАД
 {% if not exclude_back %}
     <div class="nav btn back-btn" onclick="history.back()">
     <span class="btn-text">
@@ -6,7 +6,7 @@
         <span class="btn-icon"><i class="fas fa-chevron-left"></i></span>
     </span>
     </div>
-{% endif %}
+{% endif %} -->
 
 <!-- ПРИВЕТСТВИЕ -->
 {% if authorized %}
@@ -18,6 +18,20 @@
     <div class="greeting-container">
         <span class="greeting">{{ page_name }}</span><br>
     </div>
+{% endif %}
+
+
+<!-- ТЁМНАЯ ТЕМА -->
+{% if True %}
+    <div class="nav btn">
+        <div class="link-fix" onclick="themeChanger();">
+            <span class="btn-text">
+                Тема<br>
+                <span class="btn-icon" id="btn-theme"><i class="fas fa-sun"></i></span>
+            </span>
+        </div>
+    </div>
+    <script src="/static/darkmode.js"></script>
 {% endif %}
 
 <!-- ПАНЕЛИ С ОЧКАМИ -->

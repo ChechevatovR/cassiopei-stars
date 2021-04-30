@@ -210,3 +210,17 @@ input[type=text]:valid ~ label:not(.show-password), input[type=text]:focus ~ lab
 input[type=submit][disabled] {
     background: rgba(1,1,1,0.2);
 }
+
+.btn-dark-auth {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--color-bw-second);
+    user-select: none;
+}
+
+@media (max-width: 980px) {
+    .table-btn .link-fix span {
+        display: none;
+    }
+}

@@ -185,10 +185,16 @@ a {
     justify-content: center;
 }
 
-.nav .fas, .nav .fa {
+.nav .fas, .nav .fa, .nav .far {
     line-height: 1rem;
 }
 
 .nav.wide { /* НОВЫЙ СТИЛЬ */
     flex-basis: 7rem;
+}
+
+@media (max-width: 1000px) {
+    .wide {
+        display: none;
+    }
 }
