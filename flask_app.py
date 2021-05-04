@@ -73,3 +73,4 @@ def disconnect_db(response):
 if __name__ == '__main__':
     app.run(host='localhost', port=80, debug=True)
 
+# TODO Условие и названия 45 таски ждут модерации
