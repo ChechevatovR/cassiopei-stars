@@ -69,7 +69,7 @@ def task_post(task_id: int):
         correct = answer == required
         # print(answer, required, correct)
     elif task.type_answer == 'validated':
-        correct = task.checker()
+        correct = task.checker(user.team.id)
     else:
         raise ValueError
 
