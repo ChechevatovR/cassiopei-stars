@@ -274,6 +274,17 @@ def task43_generator(team_id: int):
     return f'<img src=/{filepath} style="box-shadow: 0 0 10px rgba(0,0,0,0.5);">', ans
 
 
+def task46_checker(team_id: int) -> bool:
+    langs = [i.split(';') for i in request.headers.get('Accept-Language', 'ru').split(',')]
+    for lang in langs:
+        if len(lang) == 1:
+            lang += [1]
+            continue
+        lang[1] = float(lang[1][2:])
+    langs.sort(key=lambda i: -i[1])
+    print(langs)
+    return langs[0][0].startswith('en')
+
 # print('tasks', current_app)
 # print('tasks', current_app.app_context)
 

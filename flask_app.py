@@ -33,6 +33,7 @@ with app.app_context():
     app.config['tasks'][23].generator = task23_generator
     app.config['tasks'][29].generator = task29_generator
     app.config['tasks'][43].generator = task43_generator
+    app.config['tasks'][46].checker = task46_checker
 
 
 
@@ -72,5 +73,3 @@ def disconnect_db(response):
 
 if __name__ == '__main__':
     app.run(host='localhost', port=80, debug=True)
-
-# TODO Условие и названия 45 таски ждут модерации
