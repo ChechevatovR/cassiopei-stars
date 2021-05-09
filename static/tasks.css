@@ -26,6 +26,7 @@
 
 .task-column {
     display: inline-block;
+    max-width: 70%;
 }
 
 .align-right {
@@ -35,6 +36,7 @@
 .task-title {
     font-size: 1.6rem;
     margin-bottom: .2rem;
+
 }
 
 .task-subtitle {
