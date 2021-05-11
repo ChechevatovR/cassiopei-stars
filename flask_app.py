@@ -8,6 +8,7 @@ import manual
 import messages
 import tasks_list
 import task_displayer
+import admin
 from tasks_functions import *
 from flask import Flask, redirect, send_from_directory, g
 
@@ -18,6 +19,7 @@ app.register_blueprint(manual.bp)
 app.register_blueprint(messages.bp)
 app.register_blueprint(tasks_list.bp)
 app.register_blueprint(task_displayer.bp)
+app.register_blueprint(admin.bp)
 
 
 with app.app_context():

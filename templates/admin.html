@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>АДМИНКА</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>⚡</text></svg>">
+</head>
+<body>
+
+<header>
+    {{ header|safe }}
+</header>
+
+<form>
+    <label for="query">Запрос к БД</label>
+    <input id="query" name="query" type="text" style="display: block; width: 100%;">
+    <input type="submit" name="CSV"  formaction="/admin/fetch" formmethod="post" value="Fetch as CSV" />
+    <input type="submit" name="HTML" formaction="/admin/fetch" formmethod="post" value="Fetch as HTML table" />
+    <input type="submit" formaction="/admin/commit" formmethod="post" value="Commit" />
+
+</form>
+
+</body>
+</html>
