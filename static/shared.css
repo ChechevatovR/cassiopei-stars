@@ -37,19 +37,10 @@ body.dark-mode {
     --color-bw-third: rgba(254,254,254,0.7);
 }
 
-/*body.dark-mode {*/
-/*    background-color: #111111;*/
-/*    --color-main: orangered;*/
-/*    --color-support: darkorange;*/
-/*    --color-alternate: cornflowerblue;*/
-/*    --color-hover: #ff5a1d;*/
-/*    --color-done: rgba(255,140,0,0.5);*/
-/*    --color-even: #ffbb75;*/
-/*    --color-odd: #ffd1a0;*/
-/*    --color-bw-first: #3c3c3c;*/
-/*    --color-bw-second: white;*/
-/*    --color-bw-third: rgba(254,254,254,0.7);*/
-/*}*/
+body.dark-mode blockquote {
+    /* Да, костыль. А ты сделай лучше :P */
+    background-color: #2d2d2d;
+}
 
 body.dark-mode header, body.dark-mode .big-card {
     box-shadow: none;
@@ -169,7 +160,29 @@ a {
     font-size: 1.5rem;
 }
 
-.unread .btn-icon::after { /*ОБНОВЛЕНО*/
+blockquote {
+    font-style: italic;
+    background-color: #c2c2c2;
+    border-radius: 1rem;
+    padding: .5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: .5rem;
+}
+
+blockquote:before {
+    background-color: #878787;
+    flex: 0 0 5px;
+    content: "";
+    display: block;
+    margin-right: 1rem;
+    border-radius: 1rem;
+}
+
+.unread .btn-icon::after {
     display: flex;
     content: attr(amount);
     position: absolute;
@@ -189,7 +202,7 @@ a {
     line-height: 1rem;
 }
 
-.nav.wide { /* НОВЫЙ СТИЛЬ */
+.nav.wide {
     flex-basis: 7rem;
 }
 
