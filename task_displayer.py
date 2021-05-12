@@ -79,6 +79,7 @@ def task_post(task_id: int):
         raise ValueError
 
     # print(query_fetchone('SELECT in_row FROM task_status WHERE team_id = ? AND task_id = ?', [user.team.id, task.id]))
+    query_commit('UPDATE task_status SET in_row = 0 WHERE task_id = ? AND team_id = ? AND status = 0', [task.id, user.team.id])
 
     if correct:
         query_commit('UPDATE task_status SET status = 0, in_row = in_row + 1 WHERE team_id = ? AND task_id = ?', [user.team.id, task.id])
