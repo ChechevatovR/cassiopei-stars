@@ -43,13 +43,13 @@ class Team:
     @property
     def score(self):
         score = 0
-        for task_id in [i[0] for i in query_fetchall('SELECT task_id FROM solutions WHERE team_id = ?', [self.id])]:
+        for task_id in [i[0] for i in query_fetchall('SELECT task_id FROM solutions INNER JOIN tasks t ON t.id = solutions.task_id WHERE solutions.team_id = ? AND t.is_public = 1', [self.id])]:
             score += Task(task_id).score
         return score
 
     @property
     def tasks(self):
-        return query_fetchone('SELECT COUNT(*) FROM solutions WHERE team_id = ?', [self.id])[0]
+        return query_fetchone('SELECT COUNT(*) FROM solutions INNER JOIN tasks t ON t.id = solutions.task_id WHERE solutions.team_id = ? AND t.is_public = 1', [self.id])[0]
 
     @property
     def invite(self):
