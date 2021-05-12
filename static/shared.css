@@ -207,7 +207,7 @@ blockquote:before {
 }
 
 @media (max-width: 1000px) {
-    .wide {
+    .theme-btn {
         display: none;
     }
 }
