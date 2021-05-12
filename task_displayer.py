@@ -47,6 +47,7 @@ def task_get(task_id: int):
             'score': task.score * task.is_solved_by(user.team),
             'solved_by_n': task.solved_by_n,
             'multisolve': task.attempts_required > 1,
+            'attempts_required': task.attempts_required,
             'correct_in_row': task.correct_in_row(user.team),
             'input_form': task.input_form,
             'attachments': payload

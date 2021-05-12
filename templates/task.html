@@ -22,7 +22,8 @@
     {% else %}
         Команд, решивших эту задачу: {{ task.solved_by_n }} <br>
         {% if task.multisolve %}
-            Правильных посылок подряд: {{ task.correct_in_row }}
+            Правильных посылок подряд: {{ task.correct_in_row }} <br>
+            Осталось посылок до полного решения: {{ task.attempts_required - task.correct_in_row }}
         {% endif %}
     {% endif %}
 </div>
