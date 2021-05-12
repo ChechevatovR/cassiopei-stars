@@ -6,7 +6,7 @@ from flask import Blueprint, request, redirect, url_for, render_template, make_r
 bp = Blueprint('admin', __name__, template_folder='templates')
 
 
-@bp.route('/admin', methods=['GET'])
+@bp.route('/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46', methods=['GET'])
 def admin():
     if not (user := check_user_auth()).is_authorized or user.team.name != 'Жюри':
         return '403 Unauthorized', 403
@@ -19,7 +19,7 @@ def admin():
     )
 
 
-@bp.route('/admin/fetch', methods=['POST'])
+@bp.route('/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch', methods=['POST'])
 def admin_fetch():
     if not (user := check_user_auth()).is_authorized or user.team.name != 'Жюри':
         return '403 Unauthorized', 403
@@ -49,7 +49,7 @@ def admin_fetch():
         return csv
 
 
-@bp.route('/admin/commit', methods=['POST'])
+@bp.route('/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/commit', methods=['POST'])
 def admin_commit():
     if not (user := check_user_auth()).is_authorized or user.team.name != 'Жюри':
         return '403 Unauthorized', 403

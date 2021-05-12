@@ -5,7 +5,8 @@
     <title>АДМИНКА</title>
     <link rel="stylesheet" href="/static/shared.css">
     <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>⚡</text></svg>">
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>⚡</text></svg>">
 </head>
 <body>
 
@@ -16,11 +17,12 @@
 <form>
     <label for="query">Запрос к БД</label>
     <input id="query" name="query" type="text" style="display: block; width: 100%;">
-    <input type="submit" name="CSV"  formaction="/admin/fetch" formmethod="post" value="Fetch as CSV" />
-    <input type="submit" name="HTML" formaction="/admin/fetch" formmethod="post" value="Fetch as HTML table" />
-    <input type="submit" formaction="/admin/commit" formmethod="post" value="Commit" />
-
+    <input type="submit" name="CSV" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch"
+           formmethod="post" value="Fetch as CSV"/>
+    <input type="submit" name="HTML"
+           formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch" formmethod="post"
+           value="Fetch as HTML table"/>
+    <input type="submit" formaction="/admin/commit" formmethod="post" value="Commit"/>
 </form>
-
 </body>
 </html>
