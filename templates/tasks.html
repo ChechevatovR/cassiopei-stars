@@ -15,20 +15,24 @@
 </header>
 
 <div class="big-card">
-    {% for task in tasks %}
-        <a href="/tasks/task{{ task.id }}">
-            <div class="task {% if task.cur_score %} task-done {% endif %}" id="task{{ task.id }}">
-                <div class="task-column">
-                    <div class="task-title">{{ task.title }}</div>
-                    <div class="task-subtitle">{{ task.subtitle }}</div>
+    {% if tasks %}
+        {% for task in tasks %}
+            <a href="/tasks/task{{ task.id }}">
+                <div class="task {% if task.cur_score %} task-done {% endif %}" id="task{{ task.id }}">
+                    <div class="task-column">
+                        <div class="task-title">{{ task.title }}</div>
+                        <div class="task-subtitle">{{ task.subtitle }}</div>
+                    </div>
+                    <div class="task-column align-right">
+                        <div>Решило команд: {{ task.solved_by_n }}</div>
+                        <div>Ваш балл: {{ task.cur_score }}</div>
+                    </div>
                 </div>
-                <div class="task-column align-right">
-                    <div>Решило команд: {{ task.solved_by_n }}</div>
-                    <div>Ваш балл: {{ task.cur_score }}</div>
-                </div>
-            </div>
-        </a>
-    {% endfor %}
+            </a>
+        {% endfor %}
+    {% else %}
+        Задания пока не доступны.
+    {% endif %}
 </div>
 </body>
 </html>

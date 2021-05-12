@@ -15,7 +15,11 @@ def task_get(task_id: int):
     with current_app.app_context():
         tasks = current_app.config['tasks']
 
-    task = tasks[task_id]
+    try:
+        task = tasks[task_id]
+    except KeyError:
+        return '404 Not found', 404
+
     query_commit('INSERT OR IGNORE INTO task_status (team_id, task_id) VALUES (?, ?)', [user.team.id, task.id])
     query_commit('UPDATE task_status SET in_row = 0 WHERE task_id = ? AND team_id = ? AND status = 1', [task.id, user.team.id])
     query_commit('UPDATE task_status SET status = 1, required_answer = null WHERE task_id = ? AND team_id = ?', [task.id, user.team.id])
