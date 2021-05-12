@@ -22,23 +22,6 @@ app.register_blueprint(task_displayer.bp)
 app.register_blueprint(admin.bp)
 
 
-with app.app_context():
-    app.config['tasks'] = {id[0]: Task(id[0]) for id in query_fetchall('SELECT id FROM tasks WHERE is_public = 1', open_connection=True)}
-    app.config['tasks'][1].generator = task1_generator
-    app.config['tasks'][2].generator = task2_generator
-    app.config['tasks'][4].generator = task4_generator
-    app.config['tasks'][6].generator = task6_generator
-    app.config['tasks'][9].generator = task9_generator
-    app.config['tasks'][14].generator = task14_generator
-    app.config['tasks'][15].checker = task15_checker
-    app.config['tasks'][21].checker = task21_checker
-    app.config['tasks'][23].generator = task23_generator
-    app.config['tasks'][29].generator = task29_generator
-    app.config['tasks'][43].generator = task43_generator
-    app.config['tasks'][46].checker = task46_checker
-
-
-
 @app.route('/')
 def root():
     if not (user := check_user_auth()).is_authorized:
@@ -65,6 +48,48 @@ def serve_generated_payload(path1, path2):
 def connect_db():
     g.db_con = sqlite3.connect('db.sqlite')
     g.db_cur = g.db_con.cursor()
+
+
+@app.before_request
+def find_tasks():
+    with app.app_context():
+        app.config['tasks'] = {id_[0]: Task(id_[0]) for id_ in
+                               query_fetchall('SELECT id FROM tasks WHERE is_public = 1', open_connection=True)}
+        if app.config['tasks'].get(1, False):
+            app.config['tasks'][1].generator = task1_generator
+
+        if app.config['tasks'].get(2, False):
+            app.config['tasks'][2].generator = task2_generator
+
+        if app.config['tasks'].get(4, False):
+            app.config['tasks'][4].generator = task4_generator
+
+        if app.config['tasks'].get(6, False):
+            app.config['tasks'][6].generator = task6_generator
+
+        if app.config['tasks'].get(9, False):
+            app.config['tasks'][9].generator = task9_generator
+
+        if app.config['tasks'].get(14, False):
+            app.config['tasks'][14].generator = task14_generator
+
+        if app.config['tasks'].get(15, False):
+            app.config['tasks'][15].checker = task15_checker
+
+        if app.config['tasks'].get(21, False):
+            app.config['tasks'][21].checker = task21_checker
+
+        if app.config['tasks'].get(23, False):
+            app.config['tasks'][23].generator = task23_generator
+
+        if app.config['tasks'].get(29, False):
+            app.config['tasks'][29].generator = task29_generator
+
+        if app.config['tasks'].get(43, False):
+            app.config['tasks'][43].generator = task43_generator
+
+        if app.config['tasks'].get(46, False):
+            app.config['tasks'][46].checker = task46_checker
 
 
 @app.after_request
