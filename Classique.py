@@ -127,3 +127,7 @@ class Task:
     def attachments(self):
         if self.type_question == 'static':
             return query_fetchone('SELECT payload FROM tasks WHERE id = ?', [self.id])[0]
+
+    @property
+    def difficulty(self):
+        return int(query_fetchone('SELECT difficulty FROM tasks where id = ?', [self.id])[0])
