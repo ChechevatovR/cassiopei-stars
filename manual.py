@@ -13,7 +13,8 @@ def manual():
             'manual.html',
             header=make_header('Помощь', user, exclude_manual=True),
             authorized=True,
-            team_id=user.team.id
+            team_id=user.team.id,
+            team_invite=user.team.invite
         )
     return render_template(
         'manual.html',
