@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>⚡</text></svg>">
+    <script>
+        function fill_query(text) {
+            console.log("HERE");
+            var f = document.getElementById('query');
+            f.value = text;
+        }
+    </script>
+    <style>
+        .split-inputs input {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,14 +27,25 @@
 </header>
 
 <form>
+    <div class="split-inputs">
+        <input type="button" onclick="fill_query('SELECT * FROM users')" value="SELECT * FROM users" />
+        <input type="button" onclick="fill_query('SELECT * FROM teams')" value="SELECT * FROM teams" />
+        <input type="button" onclick="fill_query('SELECT * FROM tasks')" value="SELECT * FROM tasks" />
+        <input type="button" onclick="fill_query('SELECT * FROM messages')" value="SELECT * FROM messages" />
+        <input type="button" onclick="fill_query('UPDATE messages SET dst = ? WHERE id = ?')" value="UPDATE messages SET dst = ? WHERE id = ?" />
+        <input type="button" onclick="fill_query('UPDATE tasks SET description = ? WHERE id = ?')" value="UPDATE tasks SET description = ? WHERE id = ?" />
+        <input type="button" onclick="fill_query('DELETE FROM solutions WHERE team_id = 1')" value="DELETE FROM solutions WHERE team_id = 1" />
+    </div>
+
     <label for="query">Запрос к БД</label>
     <input id="query" name="query" type="text" style="display: block; width: 100%;">
-    <input type="submit" name="CSV" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch"
-           formmethod="post" value="Fetch as CSV"/>
     <input type="submit" name="HTML"
            formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch" formmethod="post"
            value="Fetch as HTML table"/>
+    <input type="submit" name="CSV" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch"
+           formmethod="post" value="Fetch as CSV"/>
     <input type="submit" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/commit" formmethod="post" value="Commit"/>
+
 </form>
 </body>
 </html>
