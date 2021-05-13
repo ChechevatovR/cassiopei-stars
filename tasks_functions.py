@@ -202,8 +202,6 @@ def task15_checker(team_id: int):
 
 def task21_checker(team_id: int):
     answer = request.form.get('answer')
-    if answer is not None:  # Ответ нужно отправлять не через форму
-        return False
     return 'tea' in [i.lower() for i in request.cookies.keys()]
 
 
