@@ -50,7 +50,7 @@ def _calc_positions(table_data: list):
 
 
 def _get_scoreboard_dict():
-    task_ids = [i[0] for i in query_fetchall('SELECT id FROM tasks WHERE is_public = 1')]
+    task_ids = [i[0] for i in query_fetchall('SELECT id FROM tasks WHERE is_public = 1 ORDER BY difficulty')]
     table_dict = dict.fromkeys([i[0] for i in query_fetchall('SELECT name FROM teams')])
     for key in table_dict.keys():
         table_dict[key] = [0] * (len(task_ids) + 1)
