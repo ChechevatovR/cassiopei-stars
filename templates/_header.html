@@ -12,7 +12,10 @@
 {% if authorized %}
     <div class="greeting-container">
         <span class="greeting">{{ greeting }}, {{ user_name }}!</span><br>
-        Команда: {{ team_name }}.
+        Команда: {{ team_name }}.<br>
+        {% if team_tasks %}
+            Шарики: {{ '🎈' * team_tasks }}
+        {% endif %}
     </div>
 {% else %}
     <div class="greeting-container">
