@@ -7,9 +7,8 @@ bp = Blueprint('scoreboard', __name__, template_folder='templates')
 
 @bp.route('/scoreboard', methods=['GET'])
 def scoreboard_get():
-
     table_dict = _get_scoreboard_dict()
-    table_header = ['', 'Команда', 'Балл'] + [i for i in query_fetchall('SELECT id, title FROM tasks WHERE is_public = 1')]
+    table_header = ['', 'Команда', 'Балл'] + [i for i in query_fetchall('SELECT id, title FROM tasks WHERE is_public = 1 ORDER BY difficulty ')]
     table_data = []
     for key, value in table_dict.items():
         table_data += [[0] + [key] + value]
