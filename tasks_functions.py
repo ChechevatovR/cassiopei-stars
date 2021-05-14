@@ -122,64 +122,67 @@ def task6_generator(team_id: int):
 
 
 def task6_generate_math(res: int, depth) -> str:
+    def task6_gen_add(res: int, depth: int) -> str:
+        l = random.randint(-TASK_6_RANGE, TASK_6_RANGE)
+        r = res - l
+        ls = task6_generate_math(l, depth)
+        rs = task6_generate_math(r, depth)
+        return f'({ls})+({rs})'
+
+    def task6_gen_sub(res: int, depth: int) -> str:
+        l = random.randint(-TASK_6_RANGE, TASK_6_RANGE)
+        r = l - res
+        ls = task6_generate_math(l, depth)
+        rs = task6_generate_math(r, depth)
+        return f'({ls})-({rs})'
+
+    def task6_gen_mul(res: int, depth: int) -> str:
+        l = random.choice(task6_dividers(res))
+        while l == 0:
+            l = random.choice(task6_dividers(res))
+        r = res // l
+        ls = task6_generate_math(l, depth)
+        rs = task6_generate_math(r, depth)
+        return f'({ls})*({rs})'
+
+    def task6_gen_div(res: int, depth: int) -> str:
+        r = random.randint(-10, 10)
+        while r == 0:
+            r = random.randint(-10, 10)
+        l = res * r
+        ls = task6_generate_math(l, depth)
+        rs = task6_generate_math(r, depth)
+        return f'({ls})/({rs})'
+
+    def task6_dividers(n: int) -> list:
+        res = [1, n]
+        i = 2
+        while i * i <= n:
+            if n % i == 0:
+                res += [i]
+                if i * i != n:
+                    res += [n // i]
+            i += 1
+        return res
+
     if depth < 10:
         return random.choice([task6_gen_add, task6_gen_sub, task6_gen_mul, task6_gen_div])(res, depth + 1)
     return str(res)
 
 
-def task6_gen_add(res: int, depth: int) -> str:
-    l = random.randint(-TASK_6_RANGE, TASK_6_RANGE)
-    r = res - l
-    ls = task6_generate_math(l, depth)
-    rs = task6_generate_math(r, depth)
-    return f'({ls})+({rs})'
-
-
-def task6_gen_sub(res: int, depth: int) -> str:
-    l = random.randint(-TASK_6_RANGE, TASK_6_RANGE)
-    r = l - res
-    ls = task6_generate_math(l, depth)
-    rs = task6_generate_math(r, depth)
-    return f'({ls})-({rs})'
-
-
-def task6_gen_mul(res: int, depth: int) -> str:
-    l = random.choice(task6_dividers(res))
-    while l == 0:
-        l = random.choice(task6_dividers(res))
-    r = res // l
-    ls = task6_generate_math(l, depth)
-    rs = task6_generate_math(r, depth)
-    return f'({ls})*({rs})'
-
-
-def task6_gen_div(res: int, depth: int) -> str:
-    r = random.randint(-10, 10)
-    while r == 0:
-        r = random.randint(-10, 10)
-    l = res * r
-    ls = task6_generate_math(l, depth)
-    rs = task6_generate_math(r, depth)
-    return f'({ls})/({rs})'
-
-
-def task6_dividers(n: int) -> list:
-    res = [1, n]
-    i = 2
-    while i * i <= n:
-        if n % i == 0:
-            res += [i]
-            if i * i != n:
-                res += [n // i]
-        i += 1
-    return res
-
-
 def task9_generator(team_id: int):
+    def adjust_date(text: str) -> str:
+        l = text.split('.')
+        l[0] = l[0].zfill(2)
+        l[1] = l[1].zfill(2)
+        l[2] = l[2].zfill(4)
+        text = '.'.join(l)
+        return text
+
     days = random.randint(1, 3650001)
     d1 = datetime.date.fromordinal(days).strftime("%d.%m.%Y")
     d2 = datetime.date.fromordinal(days + 701).strftime("%d.%m.%Y")
-    return d1, d2
+    return adjust_date(d1), adjust_date(d2)
 
 
 def task14_generator(team_id: int):
@@ -227,12 +230,13 @@ def task23_solve(text: str) -> str:
 
 def task29_generator(team_id: int):
     filepath = f'task-generated-content/29/task29_{team_id}.png'
+
     colour = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     img = Image.new("RGB", (2, 2), colour)
     img.save(filepath, "PNG")
-
-    req_colour = (255 - colour[0], 255 - colour[1], 255 - colour[2])
-    return f'<img src=/{filepath} width=100%>', str(req_colour)
+    answer = '#' + ''.join(map(lambda colour: hex(255 - colour)[2:].upper().zfill(2), colour))
+    print(colour, answer)
+    return f'<img src=/{filepath} width=100%>', answer
 
 
 def task43_generator(team_id: int):
@@ -282,7 +286,4 @@ def task46_checker(team_id: int) -> bool:
     langs.sort(key=lambda i: -i[1])
     print(langs)
     return langs[0][0].startswith('en')
-
-# print('tasks', current_app)
-# print('tasks', current_app.app_context)
 

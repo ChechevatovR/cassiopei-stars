@@ -23,7 +23,7 @@ def news_get():
     response = make_response(
         render_template(
             'messages.html',
-            messages=messages,
+            messages=reversed(messages),
             header=make_header(
                 'Сообщения',
                 user,
