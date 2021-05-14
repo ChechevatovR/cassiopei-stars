@@ -73,4 +73,4 @@ def refresh_task_solution(team_id: int, task_id: int) -> None:
     required = query_fetchone('SELECT attempts_required FROM tasks WHERE id = ?', [task_id])[0]
     # print(in_row, required)
     if in_row == required:
-        query_commit('REPLACE INTO solutions (team_id, task_id) VALUES (?, ?)', [team_id, task_id])
+        query_commit('insert or ignore into solutions (team_id, task_id) VALUES (?, ?)', [team_id, task_id])
