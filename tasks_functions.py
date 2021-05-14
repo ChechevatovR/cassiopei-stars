@@ -204,8 +204,7 @@ def task15_checker(team_id: int):
 
 
 def task21_checker(team_id: int):
-    answer = request.form.get('answer')
-    return 'tea' in [i.lower() for i in request.cookies.keys()]
+    return 'tea' in [i.lower() for i in (list(request.cookies.keys()) + list(request.cookies.values()))]
 
 
 def task23_generator(team_id: int):

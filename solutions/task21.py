@@ -2,7 +2,7 @@
 import requests
 
 login = 'admin'
-token = '2213ba90d3c8bba6de5ef0003a6dcab681c043ca6e2c474cea387a4c74e7eaae'
+token = '6dc95cf8121d37505ac92bf9e0313ad46517b1121709237216230e756148c709'
 host = 'http://localhost/'
 
 
@@ -10,13 +10,9 @@ def send_data():
     print(f'Sending a POST request with...   ', end='', )
     text = requests.post(
         host + 'tasks/task21',
-        cookies={'login': login, 'token': token, 'tea': '123'})
+        cookies={'login': login, 'token': token, 'tea': 'tea'})
     print('Got a response')
     return text
-
-
-def solve(text: str) -> int:
-    return int(eval(text))
 
 
 if __name__ == '__main__':
