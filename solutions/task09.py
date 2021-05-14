@@ -2,10 +2,11 @@
 import requests
 import datetime
 
-login = 'autobot'
-token = '6bdfaa4659236b37944dadeb3727565b484ac206ad15f71b5427b91685aec959'
-# host = 'http://localhost/'
-host = 'https://fetefot763.eu.pythonanywhere.com/'
+login = 'admin'
+# token = '6bdfaa4659236b37944dadeb3727565b484ac206ad15f71b5427b91685aec959'
+token = '6dc95cf8121d37505ac92bf9e0313ad46517b1121709237216230e756148c709'
+host = 'http://localhost/'
+# host = 'https://fetefot763.eu.pythonanywhere.com/'
 
 marker_beg = '<div id="task-data">'
 marker_end = '</div>'
@@ -18,7 +19,7 @@ def get_data():
         cookies={'login': login, "token": token},
         allow_redirects=False
     ).text
-    print(text)
+    # print(text)
     print('Got a response')
     return text
 

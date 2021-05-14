@@ -171,11 +171,18 @@ def task6_generate_math(res: int, depth) -> str:
 
 
 def task9_generator(team_id: int):
+    def adjust_date(text: str) -> str:
+        l = text.split('.')
+        l[0] = l[0].zfill(2)
+        l[1] = l[1].zfill(2)
+        l[2] = l[2].zfill(4)
+        text = '.'.join(l)
+        return text
+
     days = random.randint(1, 3650001)
     d1 = datetime.date.fromordinal(days).strftime("%d.%m.%Y")
     d2 = datetime.date.fromordinal(days + 701).strftime("%d.%m.%Y")
-    print(d1, d2)
-    return d1, d2
+    return adjust_date(d1), adjust_date(d2)
 
 
 def task14_generator(team_id: int):
