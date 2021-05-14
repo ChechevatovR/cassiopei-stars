@@ -2,10 +2,10 @@
 import requests
 import datetime
 
-login = 'admin'
-token = 'd5475d8022feeff00efed28421c3ef56a028687c2e58303d076f2cccded8883b'
-host = 'http://localhost/'
-# host = 'https://fetefot763.eu.pythonanywhere.com/'
+login = 'autobot'
+token = '6bdfaa4659236b37944dadeb3727565b484ac206ad15f71b5427b91685aec959'
+# host = 'http://localhost/'
+host = 'https://fetefot763.eu.pythonanywhere.com/'
 
 marker_beg = '<div id="task-data">'
 marker_end = '</div>'
@@ -18,6 +18,7 @@ def get_data():
         cookies={'login': login, "token": token},
         allow_redirects=False
     ).text
+    print(text)
     print('Got a response')
     return text
 
@@ -42,12 +43,15 @@ def get_text_from_data(data: str) -> str:
 
 
 def solve(text: str) -> str:
-    return datetime.date.fromordinal(datetime.datetime.strptime(text, '%d.%m.%Y').date().toordinal() + 701).strftime('%d.%m.%Y')
+    days = datetime.datetime.strptime(text, '%d.%m.%Y').date().toordinal()
+    days += 701
+    return datetime.date.fromordinal(days).strftime('%d.%m.%Y')
 
 
 if __name__ == '__main__':
     while True:
         txt = get_text_from_data(get_data())
+        print(txt)
         res = solve(txt)
-        send_data(solve(txt))
+        send_data(res)
 
