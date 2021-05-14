@@ -9,9 +9,14 @@
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2280%22>⚡</text></svg>">
     <script>
         function fill_query(text) {
-            console.log("HERE");
             var f = document.getElementById('query');
             f.value = text;
+        }
+        function fill_and_commit(text) {
+            var f = document.getElementById('query');
+            f.value = text;
+            var btn = document.getElementById('commit-button')
+            btn.click()
         }
     </script>
     <style>
@@ -44,8 +49,19 @@
            value="Fetch as HTML table"/>
     <input type="submit" name="CSV" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/fetch"
            formmethod="post" value="Fetch as CSV"/>
-    <input type="submit" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/commit" formmethod="post" value="Commit"/>
+    <input id="commit-button" type="submit" formaction="/9ce04b60783e43d0c3c5edd291718cc2635cbadc5922c368ee7d1fab6f4b6b46/commit" formmethod="post" value="Commit"/>
 
+    <div class="sender">
+        <br>
+        Отправить сообщение:<select id="message-dst" style="width: 100px">
+            <option value="0">Всем</option>
+            {% for team in teams %}
+                <option value="{{ team['id'] }}">{{ team['name'] }}</option>
+            {% endfor %}
+        </select><br>
+        <textarea id="message-text" name="message-text" rows="4" cols="50" placeholder="Текст"></textarea><br>
+        <input type="button" onclick="fill_and_commit('INSERT INTO messages (date, src, dst, text) VALUES (DATETIME(\'now\'), 1,' + document.getElementById('message-dst').value + ', \'' + document.getElementById('message-text').value + '\')')" value="Лети!">
+    </div>
 </form>
 </body>
 </html>
