@@ -23,6 +23,6 @@ def tasks_list():
             dict(zip(
                 ['id', 'title', 'subtitle', 'solved_by_n', 'cur_score'],
                 [task.id, task.title_full, task.subtitle, task.solved_by_n, task.score * task.is_solved_by(user.team)]))
-            for task in sorted(tasks.values(), key=lambda i: i.difficulty)
+            for task in sorted(tasks.values(), key=lambda i: (i.is_solved_by(user.team), -i.solved_by_n, i.difficulty))
         ],
         header=make_header('Список заданий', user=user, exclude_home=True))
