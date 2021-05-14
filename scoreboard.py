@@ -1,5 +1,5 @@
 from shared import *
-from flask import Blueprint, request, redirect, url_for, render_template, make_response
+from flask import Blueprint, request, redirect, url_for, render_template, make_response, current_app
 import sqlite3
 
 bp = Blueprint('scoreboard', __name__, template_folder='templates')
@@ -7,8 +7,12 @@ bp = Blueprint('scoreboard', __name__, template_folder='templates')
 
 @bp.route('/scoreboard', methods=['GET'])
 def scoreboard_get():
-    table_dict = _get_scoreboard_dict()
-    table_header = ['', 'Команда', 'Балл'] + [i for i in query_fetchall('SELECT id, title FROM tasks WHERE is_public = 1 ORDER BY difficulty ')]
+    with current_app.app_context():
+        tasks = current_app.config['tasks']
+
+    table_dict = _get_scoreboard_dict(tasks)
+    # table_header = ['', 'Команда', 'Балл'] + [i for i in query_fetchall('SELECT id, title FROM tasks WHERE is_public = 1 ORDER BY difficulty  ')]
+    table_header = ['', 'Команда', 'Балл'] + [(task.id, task.title_full) for task in sorted(tasks.values(), key=lambda i: (-i.solved_by_n, i.difficulty))]
     table_data = []
     for key, value in table_dict.items():
         table_data += [[0] + [key] + value]
@@ -49,8 +53,9 @@ def _calc_positions(table_data: list):
                 table_data[i][0] = f'{seq[0] + 1}-{seq[1] + 1}'
 
 
-def _get_scoreboard_dict():
-    task_ids = [i[0] for i in query_fetchall('SELECT id FROM tasks WHERE is_public = 1 ORDER BY difficulty')]
+def _get_scoreboard_dict(tasks):
+    task_ids = [task.id for task in sorted(tasks.values(), key=lambda i: (-i.solved_by_n, i.difficulty))]
+    # task_ids = [i[0] for i in query_fetchall('SELECT id FROM tasks WHERE is_public = 1 ORDER BY difficulty')]
     table_dict = dict.fromkeys([i[0] for i in query_fetchall('SELECT name FROM teams')])
     for key in table_dict.keys():
         table_dict[key] = [0] * (len(task_ids) + 1)
@@ -58,7 +63,8 @@ def _get_scoreboard_dict():
         solved_by = query_fetchone('SELECT COUNT(*) FROM solutions WHERE task_id = ?', [task_id])[0]
         if solved_by == 0:
             continue
-        score_per_solution = SCORE_PER_TASK // (solved_by)
+        score_per_solution = SCORE_PER_TASK // solved_by
+
         for team_name in [i[0] for i in query_fetchall(
                 'SELECT name FROM teams WHERE id IN (SELECT team_id FROM solutions WHERE task_id = ?)', [task_id])]:
             table_dict[team_name][0] += score_per_solution
