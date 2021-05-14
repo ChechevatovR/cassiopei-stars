@@ -11,11 +11,14 @@ def admin():
     if not (user := check_user_auth()).is_authorized or user.team.name != 'Жюри':
         return '403 Unauthorized', 403
 
+    teams = [dict(zip(['id', 'name'], i)) for i in query_fetchall('SELECT id, name FROM teams')]
+
     return render_template(
         'admin.html',
         header=make_header('Админка', user),
         authorized=True,
-        team_id=user.team.id
+        team_id=user.team.id,
+        teams=teams
     )
 
 
