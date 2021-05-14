@@ -67,11 +67,11 @@ def task_post(task_id: int):
     if task.type_answer == 'static':
         answer = request.form.get('answer')
         required = query_fetchone('SELECT answer FROM tasks WHERE id = ?', [task.id])[0]
-        correct = answer == required
+        correct = answer.strip() == required.strip()
     elif task.type_answer == 'generated':
         answer = request.form.get('answer')
         required = query_fetchone('SELECT required_answer FROM task_status WHERE task_id = ? AND team_id = ?', [task.id, user.team.id])[0]
-        correct = answer == required
+        correct = answer.strip() == required.strip()
         # print(answer, required, correct)
     elif task.type_answer == 'validated':
         correct = task.checker(user.team.id)
