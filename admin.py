@@ -12,18 +12,20 @@ def admin():
         return '403 Unauthorized', 403
 
     teams = [dict(zip(['id', 'name'], i)) for i in query_fetchall('SELECT id, name FROM teams')]
-    last_solution = query_fetchall('select team_id, task_id from solutions')[-1]
-    print(last_solution)
-    last_solution_message = f"Последняя решённая задача: \"{query_fetchone('select title from tasks where id=?',[last_solution[1]])[0]}\"  " \
-                            f"командой: \"{query_fetchone('select name from teams where id=?',[last_solution[0]])[0]}\""
-    print(last_solution_message)
+    solutions = query_fetchall('select team_id, task_id from solutions')
+    print(solutions)
+    solutions_messages = [f"\"{query_fetchone('select title from tasks where id=?',[solutions[-1][1]])[0]}\" от \"{query_fetchone('select name from teams where id=?',[solutions[-1][0]])[0]}\"",
+                          f"\"{query_fetchone('select title from tasks where id=?',[solutions[-2][1]])[0]}\" от \"{query_fetchone('select name from teams where id=?',[solutions[-2][0]])[0]}\"",
+                          f"\"{query_fetchone('select title from tasks where id=?',[solutions[-3][1]])[0]}\" от \"{query_fetchone('select name from teams where id=?',[solutions[-3][0]])[0]}\"",
+                          f"\"{query_fetchone('select title from tasks where id=?',[solutions[-4][1]])[0]}\" от \"{query_fetchone('select name from teams where id=?',[solutions[-4][0]])[0]}\""]
+    print(solutions_messages)
     return render_template(
         'admin.html',
         header=make_header('Админка', user),
         authorized=True,
         team_id=user.team.id,
         teams=teams,
-        last_solution_message=last_solution_message
+        last_solution_message=solutions_messages
     )
 
 
