@@ -62,7 +62,11 @@
         <textarea id="message-text" name="message-text" rows="4" cols="50" placeholder="Текст"></textarea><br>
         <input type="button" onclick="fill_and_commit('INSERT INTO messages (date, src, dst, text) VALUES (DATETIME(\'now\'), 1,' + document.getElementById('message-dst').value + ', \'' + document.getElementById('message-text').value + '\')')" value="Лети!">
     </div><br>
-    {{ last_solution_message }}
+    Последние решения:<br>
+    {{ last_solution_message[0] }}<br>
+    {{ last_solution_message[1] }}<br>
+    {{ last_solution_message[2] }}<br>
+    {{ last_solution_message[3] }}
 </form>
 </body>
 </html>
