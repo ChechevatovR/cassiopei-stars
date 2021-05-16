@@ -82,6 +82,9 @@ def find_tasks():
         if app.config['tasks'].get(23, False):
             app.config['tasks'][23].generator = task23_generator
 
+        if app.config['tasks'].get(27, False):
+            app.config['tasks'][27].generator = task27_generator
+
         if app.config['tasks'].get(29, False):
             app.config['tasks'][29].generator = task29_generator
 
