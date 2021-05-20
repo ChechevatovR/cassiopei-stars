@@ -484,8 +484,14 @@ def solve(text):
 
     \subsection{Emoji-Warrior}
     \paragraph{}
-    Скоро напишем разбор
-    % TODO
+    Не напрягаемся: берём, пишем правила замены вручную и заменяем.
+    По техническим причинам будет только картинка. Да ещё и не со всем кодом, а только фрагмент
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=7cm]{task6}
+        \label{fig:solve6}
+        \caption{Функция solve для задачи Emoji-Warrior}
+    \end{figure}
 
     \subsection{Цветовод}
     \paragraph{}
@@ -533,7 +539,6 @@ def solve(text):
         \label{lst:solve14}
         \caption{Функция solve для задачи Кадровое агенство}
     \end{listing}
-
 
     \subsection{Вечеринка}
     \paragraph{}
@@ -584,8 +589,7 @@ def solve(text):
     \subsection{Рукой подать}
     Скоро напишем разбор, но есть код решения без комментариев
     % TODO
-    \begin{listing}[H]
-        \begin{pythoncode}
+    \begin{pythoncode}
 class Vector():
     x: int
     y: int
@@ -597,10 +601,8 @@ class Vector():
     def normalize(self):
         if self.x != 0: self.x = self.x // abs(self.x)
         if self.y != 0: self.y = self.y // abs(self.y)
-        \end{pythoncode}
-    \end{listing}
+    \end{pythoncode}
 
-    \begin{listing}[H]
     \begin{pythoncode}
 def solve():
     img = Image.open('43.png')
@@ -637,45 +639,7 @@ def solve():
     else:
         ans = str(int(round_len))
     return ans
-        \end{pythoncode}
-    \end{listing}
-
-%    \subsection{Emoji Warrior}
-%
-%    \begin{pythoncode}
-%def solve(text: str) -> str:
-%    return text \
-%        .replace('🤣🤣🤣', 'rofl') \
-%        .replace('🤣🤣', 'rofl') \
-%        .replace('🤣', 'rofl') \
-%        .replace('🤔🤔🤔', 'ooo_OOO') \
-%        .replace('🤔🤔', 'oo_OO') \
-%        .replace('🤔', 'o_O') \
-%        .replace('🤑🤑🤑', '$$$_$$$') \
-%        .replace('🤑🤑', '$$_$$') \
-%        .replace('🤑', '$_$') \
-%        .replace('🙂🙂🙂', '=)))') \
-%        .replace('🙂🙂', '=))') \
-%        .replace('🙂', '=)') \
-%        .replace('🙁🙁🙁', '=(((') \
-%        .replace('🙁🙁', '=((') \
-%        .replace('🙁', '=(') \
-%        .replace('😕😕😕', '=///') \
-%        .replace('😕😕', '=//') \
-%        .replace('😕', '=/') \
-%        .replace('😑😑😑', '---_---') \
-%        .replace('😑😑', '--_--') \
-%        .replace('😑', '-_-') \
-%        .replace('😉😉😉', ';)))') \
-%        .replace('😉😉', ';))') \
-%        .replace('😉', ';)') \
-%        .replace('😂😂😂', 'XDDD') \
-%        .replace('😂😂', 'XDD') \
-%        .replace('😂', 'XD')
-%    \end{pythoncode}
-%
-%    % \newpage
-%
+    \end{pythoncode}
 
     \subsection{CuSo4}
     \paragraph{}

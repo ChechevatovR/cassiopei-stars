@@ -1,8 +1,9 @@
 # Ignore everything in this directory
 *
-# Except this file
+# Except
 !.gitignore
 !*.jpg
+!*.png
 !Tutorial.pdf
 !Tutorial.tex
 !blank.tex
