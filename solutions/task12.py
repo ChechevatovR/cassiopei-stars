@@ -1,25 +1,15 @@
-from PIL import Image
+from PIL import Image, ImageDraw
 
-def dividers(n: int) -> list:
-    res = []
-    i = 2
-    while i * i <= n:
-        if n % i == 0:
-            res += [i]
-            if i * i != n:
-                res += [n // i]
-        i += 1
-    return sorted(res)
+filepath = '12.png'  # Путь до файла с картинкой
+img = Image.open(filepath)  # Открываем картинку
+pix = img.load()  # Выгружаем картинку в матрицу значениями которой является кортеж (R,G,B) значений
+width, height = 400, 1000
 
+new_img = Image.new("RGB", (width, height), (225, 225, 225))  # Создаём пустое изрбражение заданного размера, белого фона
+draw = ImageDraw.Draw(new_img)  # Создаём холст draw на котором будем рисовать пиксели в нужном порядке
+for y in range(height):
+    for x in range(width):
+        draw.point((x,y), pix[width * y + x, 0])
+        # Рисуем на холсте в координатах (x,y) пиксель, находящийся на 400 * y + x позиции
 
-with Image.open('12.png') as im:
-    for height in dividers(400000):
-        width = 400000 // height
-        res = Image.frombytes('RGB', (width, height), im.tobytes())
-        res.save(f'12-{width}.png')
-
-# Откроем картинку
-# Посмотрим её размеры
-# Переберём все варианты размеров по делителям
-# Сохраним все, посмотрим и выберем вручную
-# Перепечатываем флаг, запоминаем правльную ширину (400)
+new_img.save('solved2.png', "PNG")  # Сохраняем полученное изображение и радуемся
