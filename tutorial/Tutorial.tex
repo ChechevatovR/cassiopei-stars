@@ -224,15 +224,113 @@
 
     \subsection{Пленочный фотоаппарат}
     \paragraph{}
-    Скоро напишем разбор
-    % TODO
+    Скачиваем предложенный файл и замечаем, что многие программы просмотра изображений
+    отказываются её показывать. В детальных свойствах картинки видим,
+    что изображение имеет размер 400000 х 1.
+    \paragraph{}
+    Ищем программу, которая откроет нам этот документ. Мы использовали лучший растровый редактор \verb|Paint|.
+    Открыв изображение видим, что оно состоит из белых и чёрных пикселей.
+    \paragraph{}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{task12}
+        \label{fig:task12}
+        \caption{Вид файла в программе \verb|Paint|}
+    \end{figure}
+    \paragraph{}
+    Методом пристального вглядывания узнаём, что в начале изображения чёрные пиксели повторяются каждые 400px.
+    Заметим, что ширина изображения очень даже кратна 400 и понимаем, что перед нами картинка размером 400 х 1000,
+    которую развернули в одну полосу, где каждый 400-й пиксель начинается следующая строка пикселей исходного изображения.
+    \paragraph{}
+    Решить задачу можно и вручную, разрезав изображение и растровом редакторе на 1000 полосок.
+    \paragraph{}
+    Но подразумевалось написание программы на языке \verb|Python| с использованием библиотеки \verb|Pillow|
+    для преобразования исходного изображения в нужное.
+    \paragraph{}
+
+    \begin{pythoncode}
+from PIL import Image, ImageDraw  # Импортируем библиотеку для работы с изображениями
+
+filepath = '12.png'         # Путь до файла с картинкой
+img = Image.open(filepath)  # Открываем картинку
+pix = img.load()            # Выгружаем картинку в матрицу значениями которой является кортеж (R,G,B) значений
+width, height = 400, 1000
+
+# Создаём пустое изрбражение заданного размера, белого фона
+new_img = Image.new("RGB", (width, height), (225, 225, 225))
+# Создаём холст draw на котором будем рисовать пиксели в нужном порядке
+draw = ImageDraw.Draw(new_img)
+for y in range(height):
+    for x in range(width):
+        # Рисуем на холсте в координатах (x,y) пиксель, находящийся на 400 * y + x позиции
+        draw.point((x,y), pix[width * y + x, 0])
+
+new_img.save('solved2.png', "PNG")  # Сохраняем полученное изображение и радуемся
+    \end{pythoncode}
     \paragraph{}
     Ответ: \verb|flag{that_was_a_good_2.3BTC}|
 
     \subsection{Пленочный фотоаппарат 2}
+    \paragraph{} % TODO можно ли сделать картинку справа от текста как в доке?
+    Тут проделываем те же шаги, что и в первой версии задачи и получаем вместо читабельного флага,
+    набор разбросанных чёрных пикселей.
     \paragraph{}
-    Скоро напишем разбор
-    % TODO
+    Смотрим внимательно на изображение и видим, что помимо чёрных и белых пикселей,
+    на изображении присутствуют красные.
+    \paragraph{}
+    Обращаем внимание, что на самый низ изображения красных пикселей не хватило, поэтому там их нет.
+    \paragraph{}
+    Красный пиксель есть в каждой строке, и он в ней ровно один.
+    И там, где красные пиксели сгруппированы рядом, чёрные пиксели повторяют их положение
+    \paragraph{}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{task12}
+        \label{fig:task12}
+        \caption{Вид файла в программе \verb|Paint|}
+    \end{figure}
+    \paragraph{}
+    Каждая строка изображения циклически сдвинута на конкретное значение и красные пиксели нужны для того,
+    чтобы однозначно определить значение сдвига и восстановить изображение.
+    (Если вы не знаете, что такое «циклический сдвиг» загляните в интернет)
+    \begin{pythoncode}
+from PIL import Image, ImageDraw
+
+filepath = '13.png'
+img = Image.open(filepath)
+pix = img.load()
+width, height = 400, 1000
+
+new_img = Image.new("RGB", (width, height), (225, 225, 225))
+draw = ImageDraw.Draw(new_img)
+for y in range(height):
+    for x in range(width):
+        draw.point((x,y), pix[width*y+x, 0])
+
+# Код выше -- решение первого плёночного фотоаппарата
+
+pix = new_img.load()        # Выгружаем полученную картинку в матрицу с цветами
+
+# Заполняем нулями массив shift, в котором будем хранить положение красного пикселя для каждой строки
+shift = [0 for i in range(height)]
+for y in range(height):
+    x = 0                   # Перебираем x от 0 до 400, пока не встретим красный пиксель (255, 0, 0)
+    while x < width and (pix[x, y][0] != 255 or pix[x, y][1] != 0 or pix[x, y][2] != 0):
+        x += 1
+    else:
+        shift[y] = x - 1    # Встретив такой пиксель записываем x в shift
+
+# Создаём новое изображение для рисования размером 400х1000
+new_img2 = Image.new("RGB", (width, height), (225, 225, 225))
+draw2 = ImageDraw.Draw(new_img2)
+for y in range(height):
+    for x in range(width):
+        # Для каждой строки делаем циклический сдвиг на shift[i] где i номер строки
+        draw2.point((x, y), pix[(x + shift[y]) % width, y])
+
+new_img2.save("13-solution.png", "PNG")  # Сохраняем
+
+    \end{pythoncode}
     \paragraph{}
     Ответ: \verb|flag{that_was_my_last_money}|
 
@@ -587,10 +685,10 @@ def solve(text):
     % \newpage
 
     \subsection{Рукой подать}
-    Скоро напишем разбор, но есть код решения без комментариев
-    % TODO
+    Условие в объяснении не требуется, используем библиотеку \verb|Pillow|.
+
     \begin{pythoncode}
-class Vector():
+class Vector:               # Опишем класс вектора для удобства
     x: int
     y: int
 
@@ -598,7 +696,7 @@ class Vector():
         self.x = x
         self.y = y
 
-    def normalize(self):
+    def simplize(self):     # Метод, где координаты вектора уменьшаем до 1, сохраняя знак
         if self.x != 0: self.x = self.x // abs(self.x)
         if self.y != 0: self.y = self.y // abs(self.y)
     \end{pythoncode}
@@ -607,34 +705,40 @@ class Vector():
 def solve():
     img = Image.open('43.png')
     pix = img.load()
-    x1, y1, x2, y2 = None, None, None, None
+    x1, y1, x2, y2 = None, None, None, None  # Координаты x y для первого и второго пикселей
 
     for x in range(img.size[0]):
         for y in range(img.size[1]):
             if pix[x, y] == (0, 0, 0):
-                if x1 is None:
+                if x1 == None:      # Находим координаты первого чёрного пикселя
                     x1 = x
                     y1 = y
-                else:
+                else:               # Находим координаты второго чёрного пикселя
                     x2 = x
                     y2 = y
-    vec = Vector(x2 - x1, y2 - y1)
-    vec.normalize()
+    vec = Vector(x2 - x1, y2 - y1)  # Создаём вектор с началом в первом пикселе и концов во втором
+    vec.simplize()                  # Упрощаем его до вектора с координатами только 1, -1, или 0
 
+    """
+    Т.к. у нас записаны координаты только верхних левых углов пикселя, нам нужно определить
+    по расположению пикселей, какие углы нужны для вычисления расстояния (См. условие)
+    В зависимости от четверти, в которой лежит вектор, меняем x1, y1, x2, y2
+    """
     if vec.x == 1 and vec.y == 1: x1 += 1; y1 += 1
     if vec.x == -1 and vec.y == 1: y1 += 1; x2 += 1
     if vec.x == 1 and vec.y == -1: x1 += 1; y2 += 1
     if vec.x == -1 and vec.y == -1: x2 += 1; y2 += 1
 
+    # Рассмотрим частные случаи, когда пиксели расположены на одной высоте или ровно друг под другом
     if vec.x == 0 and vec.y == 1: y1 += 1
     if vec.x == 0 and vec.y == -1: y2 += 1
     if vec.y == 0 and vec.x == 1: x1 += 1
     if vec.y == 0 and vec.x == -1: x2 += 1
 
-    length = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
-
-    round_len = round(length, 5)
-    if int(length) != length:
+    # Вычисляем искомое расстояние, через формулу расстояний между точками
+    length = ((x2 - x1)**2 + (y2 - y1)**2) ** 0.5
+    round_len = round(length, 5)    # Округляем до 5 знаков
+    if int(length) != length:       # Отбрасываем ".0", если он присутствует
         ans = str(round_len)
     else:
         ans = str(int(round_len))
