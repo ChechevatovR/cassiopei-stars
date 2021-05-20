@@ -14,6 +14,17 @@
     {{ header|safe }}
 </header>
 
+<div class="big-card" style="background: white; text-align: center">
+    <h1>Конкурс завершен!</h1>
+    <h3>Победители: <br>ABBOBA (Давид Лашевич, Никита Арбузов, Ольга Королева) <br> pi (Будимир Плотников, Черкасов Евгений)</h3>
+    <h3>Призеры: <br>токийские патисоны (Денис Елдов, Артем Подкур, Виктор Тимофеев)</h3>
+    {% if not(answers) %}
+    <hr>
+    <p>Приглашаем всех участников нашего конкурса поучаствовать в опросе!</p>
+    <a href="/poll" style="color: red;">Участвовать</a>
+    {% endif %}
+</div>
+
 <div class="big-card">
     {% if tasks %}
         {% for task in tasks %}

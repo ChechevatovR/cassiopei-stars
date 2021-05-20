@@ -42,7 +42,8 @@ def header_data(user: User) -> dict:
         'team_name': user.team.name,
         'team_score': user.team.score,
         'team_tasks': user.team.tasks,
-        'unread': query_fetchone('SELECT COUNT(*) FROM messages WHERE id > ? AND (src = ? OR dst = ? OR dst = 0)', [request.cookies.get('last_message_id', -1), user.id, user.id])[0]
+        'unread': query_fetchone('SELECT COUNT(*) FROM messages WHERE id > ? AND (src = ? OR dst = ? OR dst = 0)',
+                                 [request.cookies.get('last_message_id', -1), user.id, user.id])[0]
     }
 
 
@@ -55,7 +56,8 @@ def task_header_data(team_id: int, task_id: int) -> dict:
     multisolve = query_fetchone('SELECT attempts_required FROM tasks WHERE id = ?', [task_id])[0] > 0
     correct_in_row = 0
     try:
-        correct_in_row = query_fetchone('SELECT in_row FROM task_status WHERE task_id = ? AND team_id = ?', [task_id, team_id])[0]
+        correct_in_row = \
+        query_fetchone('SELECT in_row FROM task_status WHERE task_id = ? AND team_id = ?', [task_id, team_id])[0]
     except TypeError:
         pass
     res = {
@@ -74,3 +76,11 @@ def refresh_task_solution(team_id: int, task_id: int) -> None:
     # print(in_row, required)
     if in_row == required:
         query_commit('insert or ignore into solutions (team_id, task_id) VALUES (?, ?)', [team_id, task_id])
+
+
+def check_answers(user):
+    answers = query_fetchone('SELECT * FROM poll_results WHERE uid = ?', [user.id])
+    if answers is None:
+        return False
+    else:
+        return True

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Звёзды Кассиопеи - Опрос</title>
+    <link rel="stylesheet" href="/static/shared.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/poll.css">
+    <link rel="icon" href="/static/favicon.png">
+    <script src="/static/ping.js"></script>
+</head>
+<body>
+
+<header>
+    {{ header|safe }}
+</header>
+
+<div class="big-card">
+    <h1 align="center">Опрос</h1>
+    {% if not(answers) %}
+    <form method="post">
+        <h3>Какая задача вам понравилась больше всего?</h3>
+        <input type="text" name="favorite_task" placeholder="Пиши тут">
+        <hr>
+        <h3>Какая задача вам понравилась меньше всего?</h3>
+        <input type="text" name="worst_task" placeholder="Тут тоже пиши">
+        <hr>
+        <h3>Ваш комментарий насчёт удобства работы с сайтом:</h3>
+        <textarea name="site_comment" placeholder="И тут пиши"></textarea>
+        <hr>
+        <h3>Какой темой оформления пользовались?</h3>
+        <input type="radio" name="which" value="light" checked>Светлая
+        <input type="radio" name="which" value="notlight">Тёмная
+        <hr>
+        <h3>Что побудило вас на регистрацию в этом конкурсе?</h3>
+        <textarea type="text" name="why" placeholder="Type your answer"></textarea>
+        <hr>
+        <h3>Что нового вы узнали?</h3>
+        <textarea type="text" name="what" placeholder="???"></textarea>
+        <hr>
+        <h3>Как вы оцениваете сложность задач в общем?</h3>
+        <input type="text" name="difficulty" placeholder="Тут должен быть твой текст">
+        <hr>
+        <h3>Комментарий</h3>
+        <textarea type="text" name="comment" placeholder="Пиши че хочешь"></textarea>
+        <hr>
+        <input type="checkbox" onclick="document.getElementById('sbtn').toggleAttribute('disabled')">Подтвердить ответы
+        <br><span style="color: red;">Вы можете проучаствовать в опросе только один раз!</span><br><br>
+        <input id="sbtn" type="submit" value="Отправить ответы  " disabled>
+    </form>
+    {% else %}
+        <span style='text-align: center;'>Спасибо за участие в опросе!</span>
+    {% endif %}
+</div>
+
+</body>
+</html>
