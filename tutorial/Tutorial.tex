@@ -235,7 +235,7 @@
         \centering
         \includegraphics[width=\linewidth]{task12}
         \label{fig:task12}
-        \caption{Вид файла в программе \verb|Paint|}
+        \caption{Вид файла в программе Paint}
     \end{figure}
     \paragraph{}
     Методом пристального вглядывания узнаём, что в начале изображения чёрные пиксели повторяются каждые 400px.
@@ -253,7 +253,8 @@ from PIL import Image, ImageDraw  # Импортируем библиотеку 
 
 filepath = '12.png'         # Путь до файла с картинкой
 img = Image.open(filepath)  # Открываем картинку
-pix = img.load()            # Выгружаем картинку в матрицу значениями которой является кортеж (R,G,B) значений
+# Выгружаем картинку в матрицу значениями которой является кортеж (R,G,B) значений
+pix = img.load()
 width, height = 400, 1000
 
 # Создаём пустое изрбражение заданного размера, белого фона
@@ -267,8 +268,8 @@ for y in range(height):
 
 new_img.save('solved2.png', "PNG")  # Сохраняем полученное изображение и радуемся
     \end{pythoncode}
-    \paragraph{}
-    Ответ: \verb|flag{that_was_a_good_2.3BTC}|
+    \paragraph{Ответ:}
+    \verb|flag{that_was_a_good_2.3BTC}|
 
     \subsection{Пленочный фотоаппарат 2}
     \paragraph{} % TODO можно ли сделать картинку справа от текста как в доке?
@@ -285,9 +286,9 @@ new_img.save('solved2.png', "PNG")  # Сохраняем полученное и
     \paragraph{}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\linewidth]{task12}
-        \label{fig:task12}
-        \caption{Вид файла в программе \verb|Paint|}
+        \includegraphics[width=\linewidth]{task13}
+        \label{fig:task13}
+        \caption{Вид файла в программе Paint}
     \end{figure}
     \paragraph{}
     Каждая строка изображения циклически сдвинута на конкретное значение и красные пиксели нужны для того,
@@ -311,14 +312,15 @@ for y in range(height):
 
 pix = new_img.load()        # Выгружаем полученную картинку в матрицу с цветами
 
-# Заполняем нулями массив shift, в котором будем хранить положение красного пикселя для каждой строки
+# Заполняем нулями массив shift,
+# в котором будем хранить положение красного пикселя для каждой строки
 shift = [0 for i in range(height)]
 for y in range(height):
-    x = 0                   # Перебираем x от 0 до 400, пока не встретим красный пиксель (255, 0, 0)
+    x = 0  # Перебираем x от 0 до 400, пока не встретим красный пиксель (255, 0, 0)
     while x < width and (pix[x, y][0] != 255 or pix[x, y][1] != 0 or pix[x, y][2] != 0):
         x += 1
     else:
-        shift[y] = x - 1    # Встретив такой пиксель записываем x в shift
+        shift[y] = x - 1  # Встретив такой пиксель записываем x в shift
 
 # Создаём новое изображение для рисования размером 400х1000
 new_img2 = Image.new("RGB", (width, height), (225, 225, 225))
@@ -331,8 +333,8 @@ for y in range(height):
 new_img2.save("13-solution.png", "PNG")  # Сохраняем
 
     \end{pythoncode}
-    \paragraph{}
-    Ответ: \verb|flag{that_was_my_last_money}|
+    \paragraph{Ответ:}
+    \verb|flag{that_was_my_last_money}|
 
     \newpage
 
