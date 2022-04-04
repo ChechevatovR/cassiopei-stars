@@ -5,7 +5,7 @@ import sqlite3
 bp = Blueprint('poll', __name__, template_folder='templates')
 
 
-@bp.route('/poll')
+# @bp.route('/poll')
 def main():
     if not (user := check_user_auth()).is_authorized:
         return redirect('/auth')
@@ -15,7 +15,7 @@ def main():
     return render_template('poll.html', header = header, answers = check_answers(user))
 
 
-@bp.route('/poll', methods = ['post'])
+# @bp.route('/poll', methods = ['post'])
 def get_answers():
     if not (user := check_user_auth()).is_authorized:
         return redirect('/auth')

@@ -9,7 +9,7 @@ import messages
 import tasks_list
 import task_displayer
 import admin
-import poll
+# import poll_
 from tasks_functions import *
 from flask import Flask, redirect, send_from_directory, g
 
@@ -21,7 +21,7 @@ app.register_blueprint(messages.bp)
 app.register_blueprint(tasks_list.bp)
 app.register_blueprint(task_displayer.bp)
 app.register_blueprint(admin.bp)
-app.register_blueprint(poll.bp)
+# app.register_blueprint(poll.bp)
 
 
 @app.route('/')

@@ -26,5 +26,5 @@ def tasks_list():
             for task in sorted(tasks.values(), key=lambda i: (i.is_solved_by(user.team), -i.solved_by_n, i.difficulty))
         ],
         header=make_header('Список заданий', user=user, exclude_home=True),
-        answers=check_answers(user)
+        # answers=check_answers(user)
     )
